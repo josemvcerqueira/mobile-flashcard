@@ -3,3 +3,5 @@ export const $light = "#E6B3D0";
 export const $secondaryLight = "#BC6898";
 export const $dark = "#220013";
 export const $secondaryDark = "#550934";
+export const $shadow = "#000";
+export const $white = "#ffffff";
