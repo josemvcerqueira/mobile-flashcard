@@ -7,7 +7,11 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.10",
     "@emotion/native": "^10.0.10",
+    "@emotion/styled": "^10.0.10",
+    "@storybook/theming": "^5.0.11",
+    "emotion-theming": "^10.0.7",
     "expo": "^32.0.6",
     "expo-cli": "^2.17.0",
     "prop-type": "^0.0.1",
