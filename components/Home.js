@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "@emotion/native";
 import DeckCard from "./DeckCard";
 import { $shadow } from "../utils/colors";
