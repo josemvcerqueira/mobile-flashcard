@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, View } from "react-native";
 import styled, { css } from "@emotion/native";
-import { $light, $dark } from "../utils/colors";
+import { $light, $secondaryDark } from "../utils/colors";
 
 const Card = styled.View`
 	width: 300px;
 	height: 100px;
-	background-color: ${$light};
+	background-color: ${$secondaryDark};
 	justify-content: center;
 	align-items: center;
 	padding: 20px;
@@ -14,7 +14,7 @@ const Card = styled.View`
 `;
 
 const P = styled.Text`
-	color: ${$dark};
+	color: ${$light};
 `;
 
 const DeckCard = () => {
