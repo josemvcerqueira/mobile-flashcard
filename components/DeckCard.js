@@ -16,26 +16,24 @@ const P = styled.Text`
 	color: ${$primary};
 `;
 
-const DeckCard = () => {
-	return (
-		<Card>
-			<P
-				style={css`
-					margin-bottom: 5px;
-					font-size: ${$title};
-				`}
-			>
-				Title
-			</P>
-			<P
-				style={css`
-					font-size: ${$text};
-				`}
-			>
-				3 Cards
-			</P>
-		</Card>
-	);
-};
+const DeckCard = () => (
+	<Card>
+		<P
+			style={css`
+				margin-bottom: 5px;
+				font-size: ${$title};
+			`}
+		>
+			Title
+		</P>
+		<P
+			style={css`
+				font-size: ${$text};
+			`}
+		>
+			3 Cards
+		</P>
+	</Card>
+);
 
 export default DeckCard;

@@ -10,17 +10,15 @@ const StyledInput = styled.TextInput`
 	padding: ${$paddingSmall};
 `;
 
-const Input = ({ value, handleChange, color, placeholder }) => {
-	return (
-		<StyledInput
-			value={value}
-			onChange={handleChange}
-			placeholder={placeholder}
-			enablesReturnKeyAutomatically={true}
-			selectionColor={color}
-			borderColor={color}
-		/>
-	);
-};
+const Input = ({ value, handleChange, color, placeholder }) => (
+	<StyledInput
+		value={value}
+		onChange={handleChange}
+		placeholder={placeholder}
+		enablesReturnKeyAutomatically={true}
+		selectionColor={color}
+		borderColor={color}
+	/>
+);
 
 export default Input;

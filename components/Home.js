@@ -26,16 +26,12 @@ const Button = styled.TouchableOpacity`
 	elevation: 7px;
 `;
 
-const Home = ({ navigation }) => {
-	return (
-		<Container>
-			<Button
-				onPress={() => navigation.navigate("DeckPage", { entryId: 1 })}
-			>
-				<DeckCard />
-			</Button>
-		</Container>
-	);
-};
+const Home = ({ navigation }) => (
+	<Container>
+		<Button onPress={() => navigation.navigate("DeckPage", { entryId: 1 })}>
+			<DeckCard />
+		</Button>
+	</Container>
+);
 
 export default Home;

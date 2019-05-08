@@ -16,18 +16,16 @@ const Btn = ({
 	backgroundColor,
 	text,
 	onClick = () => console.log(pressed)
-}) => {
-	return (
-		<TouchableOpacity>
-			<Container
-				style={css`
-					background-color: ${backgroundColor};
-				`}
-			>
-				<Button onPress={onClick} title={text} color={color} />
-			</Container>
-		</TouchableOpacity>
-	);
-};
+}) => (
+	<TouchableOpacity>
+		<Container
+			style={css`
+				background-color: ${backgroundColor};
+			`}
+		>
+			<Button onPress={onClick} title={text} color={color} />
+		</Container>
+	</TouchableOpacity>
+);
 
 export default Btn;
