@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
-import { $secondaryDark } from "./utils/colors";
+import { $secondary } from "./utils/theme";
 import FlashCardStatusBar from "./components/StatusBar";
 import Home from "./components/Home";
 import DeckPage from "./components/DeckPage";
@@ -19,7 +19,7 @@ export default class App extends Component {
 			<Provider store={store}>
 				<View style={{ flex: 1 }}>
 					<FlashCardStatusBar
-						backgroundColor={$secondaryDark}
+						backgroundColor={$secondary}
 						barStyle="light-content"
 					/>
 					<DeckPage />

@@ -1,20 +1,20 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import styled from "@emotion/native";
+import { $margin, $padding, $shadow } from "../utils/theme";
 import DeckCard from "./DeckCard";
-import { $shadow } from "../utils/colors";
 
 const Container = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	margin: 10px;
-	padidng-horizontal: 10px;
+	margin: ${$margin};
+	padidng-horizontal: ${$padding};
 `;
 
 const Button = styled.TouchableOpacity`
 	alignitems: "center";
-	margin: 10px;
+	margin: ${$margin};
 	shadow-color: ${$shadow};
 	shadow-offset: 0px 2px;
 	shadow-opacity: 0.25px;

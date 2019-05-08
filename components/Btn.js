@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-native";
 import styled, { css } from "@emotion/native";
+import { $margin } from "../utils/theme";
 
 const Container = styled.View`
 	width: 250px;
@@ -8,7 +9,7 @@ const Container = styled.View`
 	justify-content: center;
 	align-items: center;
 	border-radius: 25px;
-	margin: 10px;
+	margin: ${$margin};
 `;
 
 const Btn = ({ color, backgroundColor, text }) => {

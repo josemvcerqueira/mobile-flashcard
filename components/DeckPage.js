@@ -1,19 +1,27 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
 import styled, { css } from "@emotion/native";
-import { $secondaryDark, $light } from "../utils/colors";
+import {
+	$danger,
+	$margin,
+	$padding,
+	$secondary,
+	$title,
+	$text,
+	$primary
+} from "../utils/theme";
 import Btn from "./Btn";
 
 const Container = styled.View`
 	flex: 1;
 	justify-content: center;
 	align-items: center;
-	margin: 10px;
-	padding: 10px;
+	margin: ${$margin};
+	padding: ${$padding};
 `;
 
 const P = styled.Text`
-	color: ${$secondaryDark};
+	color: ${$secondary};
 `;
 
 const DeckPage = () => {
@@ -22,27 +30,32 @@ const DeckPage = () => {
 			<P
 				style={css`
 					margin-bottom: 5px;
-					font-size: 40px;
+					font-size: ${$title};
 				`}
 			>
 				Title
 			</P>
 			<P
 				style={css`
-					font-size: 15px;
+					font-size: ${$text};
 				`}
 			>
 				3 Cards
 			</P>
 			<Btn
-				color={$secondaryDark}
-				backgroundColor={$light}
+				color={$primary}
+				backgroundColor={$secondary}
 				text="Add Card"
 			/>
 			<Btn
-				color={$light}
-				backgroundColor={$secondaryDark}
+				color={$secondary}
+				backgroundColor={$primary}
 				text="Start Quiz"
+			/>
+			<Button
+				color={$danger}
+				title="Delete Deck"
+				onPress={() => console.log("pressed")}
 			/>
 		</Container>
 	);
