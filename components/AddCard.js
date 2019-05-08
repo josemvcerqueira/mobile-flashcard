@@ -21,6 +21,12 @@ class AddCard extends Component {
 		answer: ""
 	};
 
+	static navigationOptions = () => {
+		return {
+			title: "Add Card"
+		};
+	};
+
 	handleQuestionInput = event => {
 		const question = event.target.value;
 		this.setState({ question });

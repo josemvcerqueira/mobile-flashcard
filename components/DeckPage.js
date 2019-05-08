@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { View, Button } from "react-native";
 import styled, { css } from "@emotion/native";
 import {
@@ -24,45 +24,57 @@ const P = styled.Text`
 	color: ${$secondary};
 `;
 
-const DeckPage = () => {
-	return (
-		<Container>
-			<View>
-				<P
-					style={css`
-						margin-bottom: 5px;
-						font-size: ${$title};
-					`}
-				>
-					Title
-				</P>
-				<P
-					style={css`
-						font-size: ${$text};
-					`}
-				>
-					3 Cards
-				</P>
-			</View>
-			<View>
-				<Btn
-					color={$primary}
-					backgroundColor={$secondary}
-					text="Add Card"
-				/>
-				<Btn
-					color={$secondary}
-					backgroundColor={$primary}
-					text="Start Quiz"
-				/>
-				<Button
-					color={$danger}
-					title="Delete Deck"
-					onPress={() => console.log("pressed")}
-				/>
-			</View>
-		</Container>
-	);
-};
+class DeckPage extends Component {
+	static navigationOptions = () => {
+		return {
+			title: "Deck Page"
+		};
+	};
+
+	render() {
+		const { navigation } = this.props;
+		return (
+			<Container>
+				<View>
+					<P
+						style={css`
+							margin-bottom: 5px;
+							font-size: ${$title};
+						`}
+					>
+						Title
+					</P>
+					<P
+						style={css`
+							font-size: ${$text};
+						`}
+					>
+						3 Cards
+					</P>
+				</View>
+				<View>
+					<Btn
+						color={$primary}
+						backgroundColor={$secondary}
+						text="Add Card"
+						onClick={() =>
+							navigation.navigate("AddCard", { entry: 1 })
+						}
+					/>
+					<Btn
+						color={$secondary}
+						backgroundColor={$primary}
+						text="Start Quiz"
+					/>
+					<Button
+						color={$danger}
+						title="Delete Deck"
+						onPress={() => console.log("pressed")}
+					/>
+				</View>
+			</Container>
+		);
+	}
+}
 
 export default DeckPage;
