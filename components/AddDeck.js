@@ -31,7 +31,7 @@ class AddDeck extends Component {
 		const { title } = this.state;
 		const { handleTitleInput } = this;
 		return (
-			<Container>
+			<Container behavior="padding" enabled keyboardVerticalOffset={20}>
 				<TouchableWithoutFeedback
 					style={{ flex: 1 }}
 					onPress={Keyboard.dismiss}

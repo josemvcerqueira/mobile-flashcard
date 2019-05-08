@@ -8,8 +8,10 @@ import {
 	$secondary,
 	$danger
 } from "../utils/theme";
+import { Header } from "react-navigation";
 import Input from "./Input";
 import Btn from "./Btn";
+
 const Container = styled.KeyboardAvoidingView`
 	flex: 1;
 	margin: ${$marginLarge};
@@ -41,7 +43,11 @@ class AddCard extends Component {
 		const { question, answer } = this.state;
 		const { handleQuestionInput, handleAnswerInput } = this;
 		return (
-			<Container behavior="padding" enabled>
+			<Container
+				behavior="padding"
+				enabled
+				keyboardVerticalOffset={Header.HEIGHT + 20}
+			>
 				<TouchableWithoutFeedback
 					style={{ flex: 1 }}
 					onPress={Keyboard.dismiss}
