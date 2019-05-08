@@ -12,5 +12,5 @@ export const $text = "15px";
 // margin
 export const $padding = "10px";
 export const $marginSmall = "10px";
-export const $marginLarge = "40px";
+export const $marginLarge = "55px";
 export const $marginBottom = "5px";

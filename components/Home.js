@@ -1,5 +1,4 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
 import styled from "@emotion/native";
 import { $marginSmall, $marginLarge, $padding, $shadow } from "../utils/theme";
 import DeckCard from "./DeckCard";

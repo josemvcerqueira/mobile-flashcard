@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, View } from "react-native";
 import styled, { css } from "@emotion/native";
 import { $primary, $secondary, $title, $text } from "../utils/theme";
 
