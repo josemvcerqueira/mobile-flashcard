@@ -5,7 +5,13 @@ import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { $secondary } from "./utils/theme";
-import { Home, AddCard, DeckPage, FlashCardStatusBar } from "./components";
+import {
+	AddCard,
+	AddDeck,
+	DeckPage,
+	FlashCardStatusBar,
+	Home
+} from "./components";
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(function fn() {},
@@ -20,7 +26,7 @@ export default class App extends Component {
 						backgroundColor={$secondary}
 						barStyle="light-content"
 					/>
-					<AddCard />
+					<AddDeck />
 				</View>
 			</Provider>
 		);

@@ -10,7 +10,7 @@ export const $title = "40px";
 export const $text = "15px";
 
 // margin
-export const $paddingMedium = "20px";
+export const $paddingSmall = "15px";
 export const $marginSmall = "10px";
 export const $marginLarge = "50px";
 export const $marginBottom = "5px";

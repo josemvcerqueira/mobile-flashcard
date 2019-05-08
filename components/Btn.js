@@ -5,9 +5,9 @@ import { $marginSmall } from "../utils/theme";
 
 const Container = styled.View`
 	width: 250px;
-	height: 70px;
+	height: 60px;
 	justify-content: center;
-	border-radius: 25px;
+	border-radius: 10px;
 	margin: ${$marginSmall};
 `;
 

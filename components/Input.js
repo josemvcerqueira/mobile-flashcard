@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "@emotion/native";
-import { $marginSmall, $paddingMedium } from "../utils/theme";
+import { $marginSmall, $paddingSmall } from "../utils/theme";
 
 const StyledInput = styled.TextInput`
-	height: 40px;
+	height: 50px;
 	width: 300px;
 	border-width: 0.9px;
 	margin: ${$marginSmall};
-	padding: ${$paddingMedium};
+	padding: ${$paddingSmall};
 `;
 
 const Input = ({ value, handleChange, color, placeholder }) => {
