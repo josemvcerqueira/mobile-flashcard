@@ -4,7 +4,7 @@ import styled, { css } from "@emotion/native";
 import {
 	$danger,
 	$marginLarge,
-	$padding,
+	$paddingSmall,
 	$secondary,
 	$title,
 	$text,
@@ -17,7 +17,7 @@ const Container = styled.View`
 	justify-content: space-between;
 	align-items: center;
 	margin: ${$marginLarge};
-	padding: ${$padding};
+	padding: ${$paddingSmall};
 `;
 
 const P = styled.Text`

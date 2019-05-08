@@ -1,6 +1,11 @@
 import React from "react";
 import styled from "@emotion/native";
-import { $marginSmall, $marginLarge, $padding, $shadow } from "../utils/theme";
+import {
+	$marginSmall,
+	$marginLarge,
+	$paddingSmall,
+	$shadow
+} from "../utils/theme";
 import DeckCard from "./DeckCard";
 
 const Container = styled.View`
@@ -8,7 +13,7 @@ const Container = styled.View`
 	justify-content: center;
 	align-items: center;
 	margin: ${$marginLarge};
-	padidng-horizontal: ${$padding};
+	padidng-horizontal: ${$paddingSmall};
 `;
 
 const Button = styled.TouchableOpacity`
