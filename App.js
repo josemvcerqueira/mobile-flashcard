@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
 import logger from "redux-logger";
 import { $white, $secondary } from "./utils/theme";
 import {
@@ -94,9 +93,7 @@ const MainNavigatior = createAppContainer(
 	})
 );
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(function fn() {},
-applyMiddleware(sagaMiddleware, logger));
+const store = createStore(function fn() {}, applyMiddleware(logger));
 
 export default class App extends Component {
 	render() {
