@@ -1,12 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
 import styled from "@emotion/native";
 import {
 	$marginSmall,
 	$marginLarge,
 	$paddingSmall,
-	$shadow
+	$shadow,
+	$secondary,
+	$title
 } from "../utils/theme";
 import DeckCard from "./DeckCard";
+import { handleDecks, isEmpty } from "../utils/helpers";
 
 const Container = styled.View`
 	flex: 1;
@@ -26,12 +29,48 @@ const Button = styled.TouchableOpacity`
 	elevation: 7px;
 `;
 
-const Home = ({ navigation }) => (
-	<Container>
-		<Button onPress={() => navigation.navigate("DeckPage", { entryId: 1 })}>
-			<DeckCard />
-		</Button>
-	</Container>
-);
+const Title = styled.Text`
+	color: ${$secondary};
+	font-size: ${$title};
+`;
+
+class Home extends Component {
+	state = {
+		decks: null
+	};
+
+	async componentDidMount() {
+		const decks = handleDecks();
+		this.setState({
+			decks
+		});
+	}
+
+	render() {
+		const { navigation } = this.props;
+		const { decks } = this.state;
+
+		if (!isEmpty(decks)) {
+			<Container>
+				<Title>You have not created any decks!</Title>
+			</Container>;
+		}
+
+		return (
+			<Container>
+				{Object.entries(decks).map(([id, deck]) => (
+					<Button
+						key={id}
+						onPress={() =>
+							navigation.navigate("DeckPage", { entryId: 1 })
+						}
+					>
+						<DeckCard deck={deck} />
+					</Button>
+				))}
+			</Container>
+		);
+	}
+}
 
 export default Home;
