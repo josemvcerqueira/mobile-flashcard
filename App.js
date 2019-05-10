@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import reducer from "./reducers";
 import logger from "redux-logger";
 import { $white, $secondary } from "./utils/theme";
 import {
@@ -93,7 +94,7 @@ const MainNavigatior = createAppContainer(
 	})
 );
 
-const store = createStore(function fn() {}, applyMiddleware(logger));
+const store = createStore(reducer, applyMiddleware(logger));
 
 export default class App extends Component {
 	render() {

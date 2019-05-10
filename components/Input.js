@@ -13,7 +13,7 @@ const StyledInput = styled.TextInput`
 const Input = ({ value, handleChange, color, placeholder }) => (
 	<StyledInput
 		value={value}
-		onChange={handleChange}
+		onChangeText={event => handleChange(event)}
 		placeholder={placeholder}
 		enablesReturnKeyAutomatically={true}
 		selectionColor={color}

@@ -1,11 +1,11 @@
 import { AsyncStorage } from "react-native";
-import { formatData } from "./helpers";
 
 const FLASHCARD_STORAGE_KEY = "mobileFlashcard:decks";
 
 export async function fetchDecks() {
+	AsyncStorage.clear();
 	const data = await AsyncStorage.getItem(FLASHCARD_STORAGE_KEY);
-	const decks = await formatData(data);
+	const decks = data === null ? {} : await JSON.parse(data);
 	return decks;
 }
 

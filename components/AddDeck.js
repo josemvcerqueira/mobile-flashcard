@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { addDeck } from "../actions";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "@emotion/native";
 import { $primary, $marginLarge, $secondary, $title } from "../utils/theme";
+import { createDeck } from "../utils/helpers";
 import Input from "./Input";
 import Btn from "./Btn";
 
@@ -20,16 +23,22 @@ class AddDeck extends Component {
 		title: ""
 	};
 
-	handleTitleInput = event => {
-		const title = event.target.value;
-		this.setState({
-			title
-		});
+	handleTitleInput = title => {
+		console.log(title);
+		this.setState({ title });
+	};
+
+	handleNewDeck = () => {
+		const { title } = this.state;
+		const newDeck = createDeck(title);
+		this.props.dispatch(addDeck(newDeck));
+		this.setState({ title: "" });
+		this.props.navigation.navigate("Home");
 	};
 
 	render() {
 		const { title } = this.state;
-		const { handleTitleInput } = this;
+		const { handleTitleInput, handleNewDeck } = this;
 		return (
 			<Container behavior="padding" enabled keyboardVerticalOffset={20}>
 				<TouchableWithoutFeedback
@@ -52,9 +61,11 @@ class AddDeck extends Component {
 							placeholder="Title"
 						/>
 						<Btn
+							value={title}
 							color={$primary}
 							backgroundColor={$secondary}
 							text="Create Deck"
+							onClick={handleNewDeck}
 						/>
 					</View>
 				</TouchableWithoutFeedback>
@@ -63,4 +74,4 @@ class AddDeck extends Component {
 	}
 }
 
-export default AddDeck;
+export default connect()(AddDeck);

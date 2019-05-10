@@ -32,7 +32,7 @@ class DeckPage extends Component {
 	};
 
 	render() {
-		const { navigation, deck } = this.props;
+		const { navigation } = this.props;
 		return (
 			<Container>
 				<View>
@@ -42,14 +42,14 @@ class DeckPage extends Component {
 							font-size: ${$title};
 						`}
 					>
-						{deck.title}
+						Title
 					</P>
 					<P
 						style={css`
 							font-size: ${$text};
 						`}
 					>
-						{deck.questions.length || 0} cards
+						3 Cards
 					</P>
 				</View>
 				<View>

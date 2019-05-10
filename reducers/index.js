@@ -2,7 +2,7 @@ import { Types } from "../actions";
 
 const INITIAL_STATE = {};
 
-export default function decks(state = INITIAL_STATE, action) {
+function decks(state = INITIAL_STATE, action) {
 	switch (action.type) {
 		case Types.ADD_DECK: {
 			const { id, title } = action.payload.deck;
@@ -24,3 +24,5 @@ export default function decks(state = INITIAL_STATE, action) {
 			return state;
 	}
 }
+
+export default decks;

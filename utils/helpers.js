@@ -12,16 +12,19 @@ export function randomId() {
 	);
 }
 
-export function formatData(data) {
-	return data === null ? {} : JSON.parse(data);
-}
-
 export async function handleDecks() {
-	const data = await fetchDecks();
-	const decks = getDecks(data);
+	const decks = await fetchDecks();
+	getDecks(decks);
 	return decks;
 }
 
 export function isEmpty(obj) {
 	return Object.keys(obj).length;
+}
+
+export function createDeck(title) {
+	return {
+		id: randomId(),
+		title
+	};
 }

@@ -16,7 +16,7 @@ const P = styled.Text`
 	color: ${$primary};
 `;
 
-const DeckCard = () => (
+const DeckCard = ({ deck }) => (
 	<Card>
 		<P
 			style={css`
@@ -24,14 +24,14 @@ const DeckCard = () => (
 				font-size: ${$title};
 			`}
 		>
-			Title
+			{deck.title}
 		</P>
 		<P
 			style={css`
 				font-size: ${$text};
 			`}
 		>
-			3 Cards
+			{deck.hasOwnProperty("question") ? deck.question.length : 0} Cards
 		</P>
 	</Card>
 );

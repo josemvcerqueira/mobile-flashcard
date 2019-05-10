@@ -15,7 +15,8 @@ const Btn = ({
 	color,
 	backgroundColor,
 	text,
-	onClick = () => console.log(pressed)
+	value,
+	onClick = () => console.log("pressed")
 }) => (
 	<TouchableOpacity>
 		<Container
@@ -23,7 +24,12 @@ const Btn = ({
 				background-color: ${backgroundColor};
 			`}
 		>
-			<Button onPress={onClick} title={text} color={color} />
+			<Button
+				disabled={value ? false : true}
+				onPress={() => onClick()}
+				title={text}
+				color={color}
+			/>
 		</Container>
 	</TouchableOpacity>
 );

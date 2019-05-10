@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import styled from "@emotion/native";
 import {
 	$marginSmall,
@@ -36,41 +37,39 @@ const Title = styled.Text`
 
 class Home extends Component {
 	state = {
-		decks: null
+		decks: {}
 	};
 
 	async componentDidMount() {
-		const decks = handleDecks();
+		const decks = await handleDecks();
 		this.setState({
 			decks
 		});
 	}
 
 	render() {
-		const { navigation } = this.props;
+		const { navigation, state } = this.props;
 		const { decks } = this.state;
-
-		if (!isEmpty(decks)) {
-			<Container>
-				<Title>You have not created any decks!</Title>
-			</Container>;
+		console.log(decks, "from home");
+		console.log(state, "HHHHHEERE");
+		if (!isEmpty(decks) && !isEmpty(state)) {
+			return (
+				<Container>
+					<Title>You have not created any decks!</Title>
+				</Container>
+			);
 		}
 
 		return (
 			<Container>
-				{Object.entries(decks).map(([id, deck]) => (
-					<Button
-						key={id}
-						onPress={() =>
-							navigation.navigate("DeckPage", { entryId: 1 })
-						}
-					>
-						<DeckCard deck={deck} />
-					</Button>
-				))}
+				<Title>{JSON.stringify(state)}</Title>
 			</Container>
 		);
 	}
 }
 
-export default Home;
+function mapStateToProps(state) {
+	return { state };
+}
+
+export default connect(mapStateToProps)(Home);
