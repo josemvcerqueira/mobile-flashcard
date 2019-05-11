@@ -24,7 +24,6 @@ class AddDeck extends Component {
 	};
 
 	handleTitleInput = title => {
-		console.log(title);
 		this.setState({ title });
 	};
 
@@ -33,7 +32,7 @@ class AddDeck extends Component {
 		const newDeck = createDeck(title);
 		this.props.dispatch(addDeck(newDeck));
 		this.setState({ title: "" });
-		this.props.navigation.navigate("Home");
+		this.props.navigation.goBack();
 	};
 
 	render() {

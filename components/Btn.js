@@ -11,13 +11,7 @@ const Container = styled.View`
 	margin: ${$marginSmall};
 `;
 
-const Btn = ({
-	color,
-	backgroundColor,
-	text,
-	value,
-	onClick = () => console.log("pressed")
-}) => (
+const Btn = ({ color, backgroundColor, text, value, onClick }) => (
 	<TouchableOpacity>
 		<Container
 			style={css`

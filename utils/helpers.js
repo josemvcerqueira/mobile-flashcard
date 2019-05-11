@@ -12,7 +12,7 @@ export function randomId() {
 	);
 }
 
-export async function handleDecks() {
+export async function handleInitialData() {
 	const decks = await fetchDecks();
 	getDecks(decks);
 	return decks;

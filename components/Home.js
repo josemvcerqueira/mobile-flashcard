@@ -10,7 +10,8 @@ import {
 	$title
 } from "../utils/theme";
 import DeckCard from "./DeckCard";
-import { handleDecks, isEmpty } from "../utils/helpers";
+import { isEmpty } from "../utils/helpers";
+import { getDecks } from "../actions";
 
 const Container = styled.View`
 	flex: 1;
@@ -36,23 +37,12 @@ const Title = styled.Text`
 `;
 
 class Home extends Component {
-	state = {
-		decks: {}
-	};
-
-	async componentDidMount() {
-		const decks = await handleDecks();
-		this.setState({
-			decks
-		});
+	componentDidMount() {
+		this.props.getDecks();
 	}
-
 	render() {
 		const { navigation, state } = this.props;
-		const { decks } = this.state;
-		console.log(decks, "from home");
-		console.log(state, "HHHHHEERE");
-		if (!isEmpty(decks) && !isEmpty(state)) {
+		if (!isEmpty(state)) {
 			return (
 				<Container>
 					<Title>You have not created any decks!</Title>
@@ -62,14 +52,22 @@ class Home extends Component {
 
 		return (
 			<Container>
-				<Title>{JSON.stringify(state)}</Title>
+				{Object.entries(state).map(([id, deck]) => (
+					<Button
+						key={id}
+						onPress={() =>
+							navigation.navigate("DeckPage", { entryId: id })
+						}
+					>
+						<DeckCard deck={deck} />
+					</Button>
+				))}
 			</Container>
 		);
 	}
 }
 
-function mapStateToProps(state) {
-	return { state };
-}
-
-export default connect(mapStateToProps)(Home);
+export default connect(
+	state => ({ state }),
+	{ getDecks }
+)(Home);
