@@ -1,11 +1,4 @@
-import {
-	takeEvery,
-	takeLatest,
-	take,
-	call,
-	fork,
-	put
-} from "redux-saga/effects";
+import { takeEvery, call, fork, put } from "redux-saga/effects";
 import * as actions from "../actions";
 import * as api from "../utils/api";
 
@@ -17,3 +10,7 @@ function* getDecks() {
 	const decks = yield call(api.fetchDecks);
 	yield put(actions.getDecks(decks));
 }
+
+const decksSagas = [fork(watchGetDecksRequest)];
+
+export default decksSagas;

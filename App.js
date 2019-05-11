@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import rootSaga from "./sagas";
+import createSagaMiddleware from "redux-saga";
 import reducer from "./reducers";
 import logger from "redux-logger";
 import { $white, $secondary } from "./utils/theme";
-import { handleInitialData } from "../utils/helpers";
 import {
 	createBottomTabNavigator,
 	createAppContainer,
@@ -95,7 +96,11 @@ const MainNavigatior = createAppContainer(
 	})
 );
 
-const store = createStore(reducer, applyMiddleware(logger));
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
+
+sagaMiddleware.run(rootSaga);
 
 const App = () => (
 	<Provider store={store}>
