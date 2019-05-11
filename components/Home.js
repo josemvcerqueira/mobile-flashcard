@@ -6,12 +6,13 @@ import {
 	$marginLarge,
 	$paddingSmall,
 	$shadow,
+	$primary,
 	$secondary,
 	$title
 } from "../utils/theme";
 import DeckCard from "./DeckCard";
 import { isEmpty } from "../utils/helpers";
-import { getDecks } from "../actions";
+import { handleInitialData } from "../actions";
 
 const Container = styled.View`
 	flex: 1;
@@ -19,6 +20,17 @@ const Container = styled.View`
 	align-items: center;
 	margin: ${$marginLarge};
 	padidng-horizontal: ${$paddingSmall};
+`;
+
+const Title = styled.Text`
+	color: ${$secondary};
+	font-size: ${$title};
+`;
+
+const Loading = styled.ActivityIndicator`
+	flex-direction: row;
+	justify-content: space-around;
+	padding: 10px;
 `;
 
 const Button = styled.TouchableOpacity`
@@ -31,21 +43,39 @@ const Button = styled.TouchableOpacity`
 	elevation: 7px;
 `;
 
-const Title = styled.Text`
-	color: ${$secondary};
-	font-size: ${$title};
-`;
-
 class Home extends Component {
-	componentDidMount() {
-		this.props.getDecks();
+	state = {
+		data: false
+	};
+
+	async componentDidMount() {
+		await this.props.handleInitialData();
+		this.setState({ data: true });
 	}
+
+	shouldComponentUpdate(nextProps) {
+		if (this.props.state !== nextProps.state) {
+			return true;
+		}
+		return false;
+	}
+
 	render() {
 		const { navigation, state } = this.props;
-		if (!isEmpty(state)) {
+		const { data } = this.state;
+
+		if (!data) {
+			<Container>
+				<Loading color={$primary} size="large" />
+			</Container>;
+		}
+
+		if (!isEmpty(state) && data) {
 			return (
 				<Container>
-					<Title>You have not created any decks!</Title>
+					<Title size="large" color={$primary}>
+						Welcome! Start by adding a deck! 😊
+					</Title>
 				</Container>
 			);
 		}
@@ -55,6 +85,7 @@ class Home extends Component {
 				{Object.entries(state).map(([id, deck]) => (
 					<Button
 						key={id}
+						color={$primary}
 						onPress={() =>
 							navigation.navigate("DeckPage", { entryId: id })
 						}
@@ -68,6 +99,8 @@ class Home extends Component {
 }
 
 export default connect(
-	state => ({ state }),
-	{ getDecks }
+	state => {
+		state;
+	},
+	{ handleInitialData }
 )(Home);

@@ -1,9 +1,9 @@
-import { takeEvery, takeLatest, call, fork, put } from "redux-saga/effects";
+import { takeLatest, call, fork, put } from "redux-saga/effects";
 import * as actions from "../actions";
 import * as api from "../utils/api";
 
 function* watchGetDecksRequest() {
-	yield takeEvery(actions.Types.GET_DECKS, getDecks);
+	yield takeLatest(actions.Types.INITIAL_DATA, getDecks);
 }
 
 function* getDecks() {
@@ -16,7 +16,7 @@ function* watchAddDeckRequest() {
 }
 
 function* addDeck(action) {
-	yield call(api.addDeck(action.payload.deck));
+	yield call(api.addDeck, action.payload.deck);
 	yield call(getDecks);
 }
 

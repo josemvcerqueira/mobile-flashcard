@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { View, Button } from "react-native";
 import styled, { css } from "@emotion/native";
 import {
@@ -7,8 +8,7 @@ import {
 	$paddingSmall,
 	$secondary,
 	$title,
-	$text,
-	$primary
+	$text
 } from "../utils/theme";
 import Btn from "./Btn";
 
@@ -31,41 +31,55 @@ class DeckPage extends Component {
 		};
 	};
 
+	shouldComponentUpdate(nextProps) {
+		if (this.props.state !== nextProps.state) return true;
+		return false;
+	}
+
 	render() {
-		const { navigation } = this.props;
+		const { navigation, stateArray } = this.props;
+		const { entryId } = navigation.state.params;
+
+		const data = stateArray.filter(arr => entryId === arr[0])[0];
+
+		const [id, deck] = data;
+
 		return (
 			<Container>
-				<View>
+				<View
+					style={css`
+						display: flex;
+						align-items: center;
+					`}
+				>
 					<P
 						style={css`
-							margin-bottom: 5px;
+							margin-bottom: 10px;
 							font-size: ${$title};
 						`}
 					>
-						Title
+						{deck.title}
 					</P>
 					<P
 						style={css`
 							font-size: ${$text};
 						`}
 					>
-						3 Cards
+						{deck.hasOwnProperty("question")
+							? deck.question.length
+							: 0}{" "}
+						Cards
 					</P>
 				</View>
 				<View>
 					<Btn
-						color={$primary}
 						backgroundColor={$secondary}
 						text="Add Card"
 						onClick={() =>
-							navigation.navigate("AddCard", { entry: 1 })
+							navigation.navigate("AddCard", { entry: id })
 						}
 					/>
-					<Btn
-						color={$secondary}
-						backgroundColor={$primary}
-						text="Start Quiz"
-					/>
+					<Btn backgroundColor={$secondary} text="Start Quiz" />
 					<Button
 						color={$danger}
 						title="Delete Deck"
@@ -77,4 +91,11 @@ class DeckPage extends Component {
 	}
 }
 
-export default DeckPage;
+function mapStateToProps(state) {
+	const stateArray = Object.entries(state);
+	return {
+		stateArray
+	};
+}
+
+export default connect(mapStateToProps)(DeckPage);

@@ -1,13 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "@emotion/native";
-import {
-	$primary,
-	$marginLarge,
-	$white,
-	$secondary,
-	$danger
-} from "../utils/theme";
+import { $primary, $marginLarge, $white, $secondary } from "../utils/theme";
 import { Header } from "react-navigation";
 import Input from "./Input";
 import Btn from "./Btn";

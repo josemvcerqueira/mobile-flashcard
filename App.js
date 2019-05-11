@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from "redux";
 import rootSaga from "./sagas";
 import createSagaMiddleware from "redux-saga";
 import reducer from "./reducers";
-import logger from "redux-logger";
 import { $white, $secondary } from "./utils/theme";
 import {
 	createBottomTabNavigator,
@@ -98,7 +97,7 @@ const MainNavigatior = createAppContainer(
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(reducer, applyMiddleware(sagaMiddleware, logger));
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 

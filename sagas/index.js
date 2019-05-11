@@ -1,4 +1,4 @@
-import decksSagas from "./users";
+import decksSagas from "./decks";
 import { all } from "redux-saga/effects";
 
 export default function* rootSaga() {
