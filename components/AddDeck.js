@@ -29,10 +29,12 @@ class AddDeck extends Component {
 
 	handleNewDeck = () => {
 		const { title } = this.state;
+		const { addDeck, navigation } = this.props;
+
 		const newDeck = createDeck(title);
-		this.props.dispatch(addDeck(newDeck));
+		addDeck(newDeck);
 		this.setState({ title: "" });
-		this.props.navigation.goBack();
+		navigation.goBack();
 	};
 
 	render() {
@@ -73,4 +75,11 @@ class AddDeck extends Component {
 	}
 }
 
-export default connect()(AddDeck);
+const mapDispatchToProps = dispatch => ({
+	addDeck: newDeck => dispatch(addDeck(newDeck))
+});
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(AddDeck);

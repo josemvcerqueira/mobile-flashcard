@@ -9,7 +9,7 @@ export async function fetchDecks() {
 	return decks;
 }
 
-export function saveDeck(id, title) {
+export function addDeck({ id, title }) {
 	AsyncStorage.mergeItem(
 		FLASHCARD_STORAGE_KEY,
 		JSON.stringify({
