@@ -11,7 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import rootSaga from "./sagas";
-import reducer from "./reducers";
+import rootReducer from "./reducers";
 import { $white, $secondary } from "./utils/theme";
 import {
 	AddCard,
@@ -27,11 +27,7 @@ const RouteConfiguration = {
 		navigationOptions: {
 			tabBarLabel: "Home",
 			tabBarIcon: ({ tintColor }) => (
-				<Ionicons
-					name="ios-add-circle-outline"
-					size={30}
-					color={tintColor}
-				/>
+				<Ionicons name="ios-bookmarks" size={30} color={tintColor} />
 			)
 		}
 	},
@@ -40,7 +36,11 @@ const RouteConfiguration = {
 		navigationOptions: {
 			tabBarLabel: "Add Deck",
 			tabBarIcon: ({ tintColor }) => (
-				<Ionicons name="ios-bookmarks" size={30} color={tintColor} />
+				<Ionicons
+					name="ios-add-circle-outline"
+					size={30}
+					color={tintColor}
+				/>
 			)
 		}
 	}
@@ -98,7 +98,7 @@ const MainNavigatior = createAppContainer(
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 

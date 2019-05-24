@@ -9,11 +9,12 @@ import {
 	$shadow,
 	$primary,
 	$secondary,
-	$title
+	$title,
+	$danger
 } from "../utils/theme";
 import DeckCard from "./DeckCard";
 import { isEmpty } from "../utils/helpers";
-import { handleInitialData } from "../actions";
+import { loadDecks } from "../actions";
 
 const Container = styled.View`
 	flex: 1;
@@ -21,6 +22,16 @@ const Container = styled.View`
 	align-items: center;
 	margin: ${$marginLarge};
 	padidng-horizontal: ${$paddingSmall};
+`;
+
+const Error = styled.View`
+	flex: 1;
+	justify-content: center;
+	align-items: center;
+	margin: ${$marginLarge};
+	padidng-horizontal: ${$paddingSmall};
+	border-radius: 4;
+	border: 1px solid ${$danger};
 `;
 
 const Title = styled.Text`
@@ -45,9 +56,8 @@ const Button = styled.TouchableOpacity`
 `;
 
 class Home extends Component {
-	constructor(props) {
-		super(props);
-		this.props.handleInitialData();
+	componentDidMount() {
+		this.props.loadDecks();
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -60,7 +70,17 @@ class Home extends Component {
 	render() {
 		const { navigation, state } = this.props;
 
-		if (!isEmpty(state)) {
+		const { isLoading, error, decks } = state;
+
+		if (isLoading) {
+			return (
+				<Container>
+					<Loading />
+				</Container>
+			);
+		}
+
+		if (!isEmpty(decks) && isLoading) {
 			return (
 				<Container>
 					<Title size="large" color={$primary}>
@@ -72,7 +92,7 @@ class Home extends Component {
 
 		return (
 			<Container>
-				{Object.entries(state).map(([id, deck]) => (
+				{Object.entries(decks).map(([id, deck]) => (
 					<Button
 						key={id}
 						color={$primary}
@@ -83,12 +103,19 @@ class Home extends Component {
 						<DeckCard deck={deck} />
 					</Button>
 				))}
+				{error && <Error>{JSON.stringify(error)}</Error>}
 			</Container>
 		);
 	}
 }
 
+function mapDispatchToProps(dispatch) {
+	return {
+		loadDecks: () => dispatch(loadDecks())
+	};
+}
+
 export default connect(
 	state => ({ state }),
-	{ handleInitialData }
+	mapDispatchToProps
 )(Home);

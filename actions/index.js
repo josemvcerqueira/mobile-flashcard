@@ -1,14 +1,21 @@
 import { DECKS } from "../constants";
 
-export const addDeck = deck => ({ type: DECKS.ADD, payload: { deck } });
+export const loadDecks = () => ({
+	type: DECKS.LOAD
+});
 
-export const handleInitialData = () => ({
-	type: DECKS.INITIAL_DATA
+export const setError = error => ({
+	type: DECKS.LOAD_FAIL,
+	payload: {
+		error
+	}
 });
 
 export const getDecks = decks => ({
-	type: DECKS.GET,
+	type: DECKS.LOAD_SUCCESS,
 	payload: {
 		decks
 	}
 });
+
+export const addDeck = deck => ({ type: DECKS.ADD, payload: { deck } });

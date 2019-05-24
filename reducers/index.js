@@ -1,28 +1,13 @@
-import { DECKS } from "../constants";
+import { combineReducers } from "redux";
 
-const INITIAL_STATE = {};
+import loadingReducer from "./loadingReducer";
+import decksReducer from "./decksReducers";
+import errorReducer from "./errorReducer";
 
-function decks(state = INITIAL_STATE, action) {
-	switch (action.type) {
-		case DECKS.ADD: {
-			const { id, title } = action.payload.deck;
-			return {
-				...state,
-				[id]: {
-					title
-				}
-			};
-		}
-		case DECKS.GET: {
-			const { decks } = action.payload;
-			return {
-				...state,
-				...decks
-			};
-		}
-		default:
-			return state;
-	}
-}
+const rootReducer = combineReducers({
+	isLoading: loadingReducer,
+	decks: decksReducer,
+	error: errorReducer
+});
 
-export default decks;
+export default rootReducer;

@@ -5,10 +5,10 @@ import * as api from "../utils/api";
 import { DECKS } from "../constants";
 
 function* watchGetDecksRequest() {
-	yield takeLatest(DECKS.INITIAL_DATA, getDecks);
+	yield takeLatest(DECKS.LOAD, handleDecksLoad);
 }
 
-function* getDecks() {
+function* handleDecksLoad() {
 	const decks = yield call(api.fetchDecks);
 	yield put(actions.getDecks(decks));
 }
@@ -19,7 +19,7 @@ function* watchAddDeckRequest() {
 
 function* addDeck(action) {
 	yield call(api.addDeck, action.payload.deck);
-	yield call(getDecks);
+	yield call(handleDecksLoad);
 }
 
 const decksSagas = [fork(watchGetDecksRequest), fork(watchAddDeckRequest)];

@@ -92,8 +92,8 @@ class DeckPage extends Component {
 	}
 }
 
-function mapStateToProps(state) {
-	const stateArray = Object.entries(state);
+function mapStateToProps({ decks }) {
+	const stateArray = Object.entries(decks);
 	return {
 		stateArray
 	};
