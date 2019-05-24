@@ -14,7 +14,7 @@
     "emotion-theming": "^10.0.7",
     "eslint-plugin-react": "^7.13.0",
     "expo": "^32.0.6",
-    "expo-cli": "^2.17.1",
+    "expo-cli": "^2.18.3",
     "global": "^4.3.2",
     "prop-type": "^0.0.1",
     "react": "16.5.0",

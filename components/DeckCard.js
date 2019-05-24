@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "@emotion/native";
+
 import { $primary, $secondary, $title, $text } from "../utils/theme";
 
 const Card = styled.View`

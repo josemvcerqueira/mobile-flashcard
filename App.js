@@ -2,15 +2,17 @@ import React from "react";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import rootSaga from "./sagas";
 import createSagaMiddleware from "redux-saga";
-import reducer from "./reducers";
-import { $white, $secondary } from "./utils/theme";
 import {
 	createBottomTabNavigator,
 	createAppContainer,
 	createStackNavigator
 } from "react-navigation";
+import { Ionicons } from "@expo/vector-icons";
+
+import rootSaga from "./sagas";
+import reducer from "./reducers";
+import { $white, $secondary } from "./utils/theme";
 import {
 	AddCard,
 	AddDeck,
@@ -18,7 +20,6 @@ import {
 	FlashCardStatusBar,
 	Home
 } from "./components";
-import { Ionicons } from "@expo/vector-icons";
 
 const RouteConfiguration = {
 	Home: {

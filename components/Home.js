@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "@emotion/native";
+
 import {
 	$marginSmall,
 	$marginLarge,
@@ -44,13 +45,9 @@ const Button = styled.TouchableOpacity`
 `;
 
 class Home extends Component {
-	state = {
-		data: false
-	};
-
-	async componentDidMount() {
-		await this.props.handleInitialData();
-		this.setState({ data: true });
+	constructor(props) {
+		super(props);
+		this.props.handleInitialData();
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -62,15 +59,8 @@ class Home extends Component {
 
 	render() {
 		const { navigation, state } = this.props;
-		const { data } = this.state;
 
-		if (!data) {
-			<Container>
-				<Loading color={$primary} size="large" />
-			</Container>;
-		}
-
-		if (!isEmpty(state) && data) {
+		if (!isEmpty(state)) {
 			return (
 				<Container>
 					<Title size="large" color={$primary}>
@@ -99,8 +89,6 @@ class Home extends Component {
 }
 
 export default connect(
-	state => {
-		state;
-	},
+	state => ({ state }),
 	{ handleInitialData }
 )(Home);

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/native";
+
 import { $marginSmall, $paddingSmall } from "../utils/theme";
 
 const StyledInput = styled.TextInput`

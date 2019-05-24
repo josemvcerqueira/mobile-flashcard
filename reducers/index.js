@@ -1,10 +1,10 @@
-import { Types } from "../actions";
+import { DECKS } from "../constants";
 
 const INITIAL_STATE = {};
 
 function decks(state = INITIAL_STATE, action) {
 	switch (action.type) {
-		case Types.ADD_DECK: {
+		case DECKS.ADD: {
 			const { id, title } = action.payload.deck;
 			return {
 				...state,
@@ -13,7 +13,7 @@ function decks(state = INITIAL_STATE, action) {
 				}
 			};
 		}
-		case Types.GET_DECKS: {
+		case DECKS.GET: {
 			const { decks } = action.payload;
 			return {
 				...state,

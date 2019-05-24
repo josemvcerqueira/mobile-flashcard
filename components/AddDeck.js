@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addDeck } from "../actions";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "@emotion/native";
+
+import { addDeck } from "../actions";
 import { $primary, $marginLarge, $secondary, $title } from "../utils/theme";
 import { createDeck } from "../utils/helpers";
 import Input from "./Input";

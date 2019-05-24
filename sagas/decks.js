@@ -1,9 +1,11 @@
 import { takeLatest, call, fork, put } from "redux-saga/effects";
+
 import * as actions from "../actions";
 import * as api from "../utils/api";
+import { DECKS } from "../constants";
 
 function* watchGetDecksRequest() {
-	yield takeLatest(actions.Types.INITIAL_DATA, getDecks);
+	yield takeLatest(DECKS.INITIAL_DATA, getDecks);
 }
 
 function* getDecks() {
@@ -12,7 +14,7 @@ function* getDecks() {
 }
 
 function* watchAddDeckRequest() {
-	yield takeLatest(actions.Types.ADD_DECK, addDeck);
+	yield takeLatest(DECKS.ADD, addDeck);
 }
 
 function* addDeck(action) {

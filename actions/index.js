@@ -1,17 +1,13 @@
-export const Types = {
-	ADD_DECK: "ADD_DECK",
-	GET_DECKS: "GET_DECKS",
-	INITIAL_DATA: "INITIAL_DATA"
-};
+import { DECKS } from "../constants";
 
-export const addDeck = deck => ({ type: Types.ADD_DECK, payload: { deck } });
+export const addDeck = deck => ({ type: DECKS.ADD, payload: { deck } });
 
 export const handleInitialData = () => ({
-	type: Types.INITIAL_DATA
+	type: DECKS.INITIAL_DATA
 });
 
 export const getDecks = decks => ({
-	type: Types.GET_DECKS,
+	type: DECKS.GET,
 	payload: {
 		decks
 	}
