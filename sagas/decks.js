@@ -9,8 +9,12 @@ function* watchGetDecksRequest() {
 }
 
 function* handleDecksLoad() {
-	const decks = yield call(api.fetchDecks);
-	yield put(actions.getDecks(decks));
+	try {
+		const decks = yield call(api.fetchDecks);
+		yield put(actions.getDecks(decks));
+	} catch (error) {
+		yield put(actions.setError(error.toString()));
+	}
 }
 
 function* watchAddDeckRequest() {
