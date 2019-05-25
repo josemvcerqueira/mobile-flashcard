@@ -13,26 +13,22 @@ export function addDeck({ id, title }) {
 		FLASHCARD_STORAGE_KEY,
 		JSON.stringify({
 			[id]: {
-				title
+				title,
+				questions: []
 			}
 		})
 	);
 }
 
-export function addCard({ id, question, answer }) {
+export async function addCard({ id, question, answer }) {
 	const arr = [{ question: question, answer: answer }];
-	AsyncStorage.mergeItem(
-		FLASHCARD_STORAGE_KEY,
-		JSON.stringify({
-			[id]: {
-				questions: [...[id].questions].concat(arr)
-			}
-		})
-	);
+	const data = await AsyncStorage.getItem(FLASHCARD_STORAGE_KEY);
+	const decks = await JSON.parse(data);
+	decks[id].questions = decks[id].questions.concat(arr);
+	AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(decks));
 }
 
 export async function removeDeck(id) {
-	console.log(id);
 	const data = await AsyncStorage.getItem(FLASHCARD_STORAGE_KEY);
 	const decks = await JSON.parse(data);
 	decks[id] = undefined;

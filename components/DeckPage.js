@@ -40,7 +40,6 @@ class DeckPage extends Component {
 
 	render() {
 		const { navigation, stateArray, removeDeck } = this.props;
-		const { addCard } = this;
 		const { entryId } = navigation.state.params;
 
 		const data = stateArray.filter(arr => entryId === arr[0])[0];
@@ -68,10 +67,7 @@ class DeckPage extends Component {
 							font-size: ${$text};
 						`}
 					>
-						{deck.hasOwnProperty("question")
-							? deck.question.length
-							: 0}{" "}
-						Cards
+						{deck.questions.length} Cards
 					</P>
 				</View>
 				<View>
@@ -79,7 +75,7 @@ class DeckPage extends Component {
 						backgroundColor={$secondary}
 						text="Add Card"
 						onClick={() =>
-							navigation.navigate("AddCard", { entry: id })
+							navigation.navigate("AddCard", { entryId: id })
 						}
 					/>
 					<Btn backgroundColor={$secondary} text="Start Quiz" />

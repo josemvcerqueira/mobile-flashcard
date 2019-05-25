@@ -8,7 +8,9 @@ function decks(state = {}, action) {
 			return {
 				...state,
 				[id]: {
-					title
+					...state[id],
+					title,
+					questions: []
 				}
 			};
 		}
@@ -20,7 +22,6 @@ function decks(state = {}, action) {
 			const { id } = action.payload;
 			let stateArr = Object.entries(state).filter(deck => deck[0] !== id);
 			let stateObj = fromEntries(stateArr);
-			console.log(stateObj);
 			return { ...stateObj };
 		}
 		case CARDS.ADD: {
@@ -30,7 +31,7 @@ function decks(state = {}, action) {
 				...state,
 				[id]: {
 					...state[id],
-					questions: [...state[id].questions].concat(arr)
+					questions: state[id].questions.concat(arr)
 				}
 			};
 		}

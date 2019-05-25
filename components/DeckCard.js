@@ -32,7 +32,7 @@ const DeckCard = ({ deck }) => (
 				font-size: ${$text};
 			`}
 		>
-			{deck.hasOwnProperty("question") ? deck.question.length : 0} Cards
+			{deck.questions.length} Cards
 		</P>
 	</Card>
 );

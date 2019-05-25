@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "@emotion/native";
 import { Header } from "react-navigation";
+import { connect } from "react-redux";
 
+import { addCard } from "../actions";
 import { $primary, $marginLarge, $secondary } from "../utils/theme";
 import Input from "./Input";
 import Btn from "./Btn";
@@ -32,13 +34,22 @@ class AddCard extends Component {
 		this.setState({ answer });
 	};
 
+	handleAddCard = () => {
+		const { entryId } = this.props.navigation.state.params;
+		const question = this.state.question;
+		const answer = this.state.answer;
+
+		const card = { question, answer, id: entryId };
+		this.props.addCard(card);
+		this.props.navigation.navigate("DeckPage", { entryId: entryId });
+	};
+
 	render() {
 		const { question, answer } = this.state;
-		const { handleQuestionInput, handleAnswerInput } = this;
-		const value = question.length > 0 && answer.length > 0;
-		console.log(value, "VALUEEE");
+		const { handleQuestionInput, handleAnswerInput, handleAddCard } = this;
 
-		console.log(this.state);
+		const value = question.length > 0 && answer.length > 0;
+
 		return (
 			<Container
 				behavior="padding"
@@ -72,6 +83,7 @@ class AddCard extends Component {
 							/>
 						</View>
 						<Btn
+							onClick={handleAddCard}
 							value={value}
 							backgroundColor={$secondary}
 							text="Submit"
@@ -83,4 +95,13 @@ class AddCard extends Component {
 	}
 }
 
-export default AddCard;
+function mapDispatchToProps(dispatch) {
+	return {
+		addCard: card => dispatch(addCard(card))
+	};
+}
+
+export default connect(
+	null,
+	mapDispatchToProps
+)(AddCard);

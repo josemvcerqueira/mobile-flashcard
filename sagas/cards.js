@@ -1,4 +1,4 @@
-import { takeLatest, call, fork } from "redux-saga/effects";
+import { takeLatest, call } from "redux-saga/effects";
 
 import * as api from "../utils/api";
 import { CARDS } from "../constants";
@@ -11,6 +11,6 @@ function* addCard(action) {
 	yield call(api.addCard, action.payload.card);
 }
 
-const decksSagas = [fork(watchAddCardRequest)];
+const cardsSagas = watchAddCardRequest;
 
-export default decksSagas;
+export default cardsSagas;
