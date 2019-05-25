@@ -1,4 +1,4 @@
-import { DECKS } from "../constants";
+import { DECKS, CARDS } from "../constants";
 import { fromEntries } from "../utils/helpers";
 
 function decks(state = {}, action) {
@@ -22,6 +22,17 @@ function decks(state = {}, action) {
 			let stateObj = fromEntries(stateArr);
 			console.log(stateObj);
 			return { ...stateObj };
+		}
+		case CARDS.ADD: {
+			const { question, answer, id } = action.payload.card;
+			const arr = [{ question: question, answer: answer }];
+			return {
+				...state,
+				[id]: {
+					...state[id],
+					questions: [...state[id].questions].concat(arr)
+				}
+			};
 		}
 		default:
 			return state;

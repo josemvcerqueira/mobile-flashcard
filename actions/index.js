@@ -1,4 +1,4 @@
-import { DECKS } from "../constants";
+import { DECKS, CARDS } from "../constants";
 
 export const loadDecks = () => ({
 	type: DECKS.LOAD
@@ -21,3 +21,5 @@ export const getDecks = decks => ({
 export const addDeck = deck => ({ type: DECKS.ADD, payload: { deck } });
 
 export const removeDeck = id => ({ type: DECKS.REMOVE, payload: { id } });
+
+export const addCard = card => ({ type: CARDS.ADD, payload: { card } });
