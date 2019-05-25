@@ -80,7 +80,7 @@ class Home extends Component {
 			);
 		}
 
-		if (!isEmpty(decks) && isLoading) {
+		if (!isEmpty(decks) && !isLoading) {
 			return (
 				<Container>
 					<Title size="large" color={$primary}>

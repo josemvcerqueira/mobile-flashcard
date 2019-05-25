@@ -19,3 +19,5 @@ export const getDecks = decks => ({
 });
 
 export const addDeck = deck => ({ type: DECKS.ADD, payload: { deck } });
+
+export const removeDeck = id => ({ type: DECKS.REMOVE, payload: { id } });

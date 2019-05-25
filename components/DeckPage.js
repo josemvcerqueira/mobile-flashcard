@@ -12,6 +12,7 @@ import {
 	$text
 } from "../utils/theme";
 import Btn from "./Btn";
+import { removeDeck } from "../actions";
 
 const Container = styled.View`
 	flex: 1;
@@ -38,7 +39,7 @@ class DeckPage extends Component {
 	}
 
 	render() {
-		const { navigation, stateArray } = this.props;
+		const { navigation, stateArray, removeDeck } = this.props;
 		const { entryId } = navigation.state.params;
 
 		const data = stateArray.filter(arr => entryId === arr[0])[0];
@@ -84,7 +85,10 @@ class DeckPage extends Component {
 					<Button
 						color={$danger}
 						title="Delete Deck"
-						onPress={() => console.log("pressed")}
+						onPress={() => {
+							removeDeck(id);
+							navigation.navigate("Home");
+						}}
 					/>
 				</View>
 			</Container>
@@ -99,4 +103,13 @@ function mapStateToProps({ decks }) {
 	};
 }
 
-export default connect(mapStateToProps)(DeckPage);
+function mapDispatchToProps(dispatch) {
+	return {
+		removeDeck: id => dispatch(removeDeck(id))
+	};
+}
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(DeckPage);

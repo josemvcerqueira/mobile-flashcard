@@ -18,3 +18,12 @@ export function addDeck({ id, title }) {
 		})
 	);
 }
+
+export async function removeDeck(id) {
+	console.log(id);
+	const data = await AsyncStorage.getItem(FLASHCARD_STORAGE_KEY);
+	const decks = await JSON.parse(data);
+	decks[id] = undefined;
+	delete decks[id];
+	AsyncStorage.setItem(FLASHCARD_STORAGE_KEY, JSON.stringify(decks));
+}

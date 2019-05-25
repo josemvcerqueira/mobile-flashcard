@@ -28,3 +28,13 @@ export function createDeck(title) {
 		title
 	};
 }
+
+export function fromEntries(arr) {
+	const obj = arr.reduce((acc, element) => {
+		let key = element[0];
+		acc[key] = element[1];
+		return acc;
+	}, {});
+
+	return obj;
+}

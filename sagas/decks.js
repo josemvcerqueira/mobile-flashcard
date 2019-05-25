@@ -26,6 +26,19 @@ function* addDeck(action) {
 	yield call(handleDecksLoad);
 }
 
-const decksSagas = [fork(watchGetDecksRequest), fork(watchAddDeckRequest)];
+function* watchRemoveDeckRequest() {
+	yield takeLatest(DECKS.REMOVE, removeDeck);
+}
+
+function* removeDeck(action) {
+	yield call(api.removeDeck, action.payload.id);
+	yield call(handleDecksLoad);
+}
+
+const decksSagas = [
+	fork(watchGetDecksRequest),
+	fork(watchAddDeckRequest),
+	fork(watchRemoveDeckRequest)
+];
 
 export default decksSagas;
