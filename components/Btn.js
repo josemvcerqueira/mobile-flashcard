@@ -12,20 +12,29 @@ const Container = styled.View`
 	margin: ${$marginSmall};
 `;
 
-const Btn = ({ backgroundColor, text, value, onClick }) => (
-	<TouchableOpacity>
-		<Container
-			style={css`
-				background-color: ${backgroundColor};
-			`}
-		>
-			<Button
-				disabled={value ? false : true}
-				onPress={() => onClick()}
-				title={text}
-			/>
-		</Container>
-	</TouchableOpacity>
-);
+const Btn = ({
+	backgroundColor,
+	text,
+	value = true,
+	onClick = () => {
+		console.log("pressed");
+	}
+}) => {
+	return (
+		<TouchableOpacity>
+			<Container
+				style={css`
+					background-color: ${backgroundColor};
+				`}
+			>
+				<Button
+					disabled={value ? false : true}
+					onPress={onClick}
+					title={text}
+				/>
+			</Container>
+		</TouchableOpacity>
+	);
+};
 
 export default Btn;

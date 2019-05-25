@@ -64,7 +64,6 @@ class AddDeck extends Component {
 						/>
 						<Btn
 							value={title}
-							color={$primary}
 							backgroundColor={$secondary}
 							text="Create Deck"
 							onClick={handleNewDeck}

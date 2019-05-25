@@ -40,6 +40,7 @@ class DeckPage extends Component {
 
 	render() {
 		const { navigation, stateArray, removeDeck } = this.props;
+		const { addCard } = this;
 		const { entryId } = navigation.state.params;
 
 		const data = stateArray.filter(arr => entryId === arr[0])[0];

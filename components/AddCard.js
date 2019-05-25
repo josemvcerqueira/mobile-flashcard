@@ -3,7 +3,7 @@ import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
 import styled from "@emotion/native";
 import { Header } from "react-navigation";
 
-import { $primary, $marginLarge, $white, $secondary } from "../utils/theme";
+import { $primary, $marginLarge, $secondary } from "../utils/theme";
 import Input from "./Input";
 import Btn from "./Btn";
 
@@ -24,19 +24,21 @@ class AddCard extends Component {
 		};
 	};
 
-	handleQuestionInput = event => {
-		const question = event.target.value;
+	handleQuestionInput = question => {
 		this.setState({ question });
 	};
 
-	handleAnswerInput = event => {
-		const answer = event.target.value;
+	handleAnswerInput = answer => {
 		this.setState({ answer });
 	};
 
 	render() {
 		const { question, answer } = this.state;
 		const { handleQuestionInput, handleAnswerInput } = this;
+		const value = question.length > 0 && answer.length > 0;
+		console.log(value, "VALUEEE");
+
+		console.log(this.state);
 		return (
 			<Container
 				behavior="padding"
@@ -70,7 +72,7 @@ class AddCard extends Component {
 							/>
 						</View>
 						<Btn
-							color={$white}
+							value={value}
 							backgroundColor={$secondary}
 							text="Submit"
 						/>
