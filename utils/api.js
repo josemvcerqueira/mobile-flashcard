@@ -19,6 +19,18 @@ export function addDeck({ id, title }) {
 	);
 }
 
+export function addCard({ id, question, answer }) {
+	const arr = [{ question: question, answer: answer }];
+	AsyncStorage.mergeItem(
+		FLASHCARD_STORAGE_KEY,
+		JSON.stringify({
+			[id]: {
+				questions: [...[id].questions].concat(arr)
+			}
+		})
+	);
+}
+
 export async function removeDeck(id) {
 	console.log(id);
 	const data = await AsyncStorage.getItem(FLASHCARD_STORAGE_KEY);
