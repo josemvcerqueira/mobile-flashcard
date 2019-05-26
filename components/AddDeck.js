@@ -35,7 +35,7 @@ class AddDeck extends Component {
 		const newDeck = createDeck(title);
 		addDeck(newDeck);
 		this.setState({ title: "" });
-		navigation.goBack();
+		navigation.navigate("DeckPage", { entryId: newDeck.id });
 	};
 
 	render() {
