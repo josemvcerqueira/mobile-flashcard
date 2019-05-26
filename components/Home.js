@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "@emotion/native";
+import { Animated } from "react-native";
 
 import {
-	$marginSmall,
 	$marginLarge,
 	$paddingSmall,
-	$shadow,
 	$primary,
 	$secondary,
 	$title,
 	$danger
 } from "../utils/theme";
-import DeckCard from "./DeckCard";
+import AnimatedView from "./AnimatedView";
 import { isEmpty } from "../utils/helpers";
 import { loadDecks } from "../actions";
 
@@ -45,34 +44,20 @@ const Loading = styled.ActivityIndicator`
 	padding: 10px;
 `;
 
-const Button = styled.TouchableOpacity`
-	alignitems: "center";
-	margin: ${$marginSmall};
-	shadow-color: ${$shadow};
-	shadow-offset: 0px 2px;
-	shadow-opacity: 0.25px;
-	shadow-radius: 1px;
-	elevation: 7px;
-`;
-
 class Home extends Component {
+	state = {
+		bounceValue: new Animated.Value(1),
+		idValue: 0
+	};
+
 	componentDidMount() {
 		this.props.loadDecks();
 	}
 
-	shouldComponentUpdate(nextProps) {
-		if (this.props.state !== nextProps.state) {
-			return true;
-		}
-		return false;
-	}
-
 	render() {
-		const { navigation, state } = this.props;
+		const { state, navigation } = this.props;
 
 		const { isLoading, error, decks } = state;
-
-		console.log(state);
 
 		if (isLoading) {
 			return (
@@ -95,15 +80,12 @@ class Home extends Component {
 		return (
 			<Container>
 				{Object.entries(decks).map(([id, deck]) => (
-					<Button
+					<AnimatedView
 						key={id}
-						color={$primary}
-						onPress={() =>
-							navigation.navigate("DeckPage", { entryId: id })
-						}
-					>
-						<DeckCard deck={deck} />
-					</Button>
+						deck={deck}
+						id={id}
+						navigation={navigation}
+					/>
 				))}
 				{error && <Error>{JSON.stringify(error)}</Error>}
 			</Container>
