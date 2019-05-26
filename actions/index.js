@@ -27,3 +27,5 @@ export const addCard = card => ({ type: CARDS.ADD, payload: { card } });
 export const addCorrectAnswer = () => ({ type: QUIZ.CORRECT });
 
 export const addIncorrectAnswer = () => ({ type: QUIZ.INCORRECT });
+
+export const resetQuiz = () => ({ type: QUIZ.RESET });

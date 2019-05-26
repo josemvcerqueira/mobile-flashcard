@@ -17,6 +17,10 @@ function quizReducer(state = INITIAL_STATE, action) {
 				...state,
 				incorrect: state.incorrect + 1
 			};
+		case QUIZ.RESET:
+			return {
+				...INITIAL_STATE
+			};
 		default:
 			return state;
 	}
