@@ -4,13 +4,13 @@ import { fromEntries } from "../utils/helpers";
 function decks(state = {}, action) {
 	switch (action.type) {
 		case DECKS.ADD: {
-			const { id, title } = action.payload.deck;
+			const { id, title, questions } = action.payload.deck;
 			return {
 				...state,
 				[id]: {
 					...state[id],
 					title,
-					questions: []
+					questions
 				}
 			};
 		}

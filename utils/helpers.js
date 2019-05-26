@@ -25,7 +25,8 @@ export function isEmpty(obj) {
 export function createDeck(title) {
 	return {
 		id: randomId(),
-		title
+		title,
+		questions: []
 	};
 }
 
