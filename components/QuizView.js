@@ -1,58 +1,40 @@
-import React, { Component, Fragment } from "react";
-import styled, { css } from "@emotion/native";
-import { Button } from "react-native";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Animated, View } from "react-native";
+import { css } from "@emotion/native";
 
-import {
-	$danger,
-	$secondary,
-	$title,
-	$primary,
-	$marginLarge,
-	$paddingSmall
-} from "../utils/theme";
-import Btn from "./Btn";
+import QuizPage from "./QuizPage";
 import { generator } from "../utils/helpers";
 import { addCorrectAnswer, addIncorrectAnswer, resetQuiz } from "../actions";
-
-const Screen = styled.View`
-	flex: 1;
-	align-items: center;
-	justify-content: space-between;
-	position: relative;
-`;
-
-const P = styled.Text`
-	color: ${$secondary};
-`;
-
-const Container = styled.View`
-	flex: 1;
-	align-items: center;
-	justify-content: space-between;
-	margin: ${$marginLarge};
-	padding: ${$paddingSmall};
-`;
-
-const Div = styled.View`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
 
 class QuizView extends Component {
 	state = {
 		question: "",
 		answer: "",
 		number: 1,
-		QA: null,
-		title: "answer"
+		QA: null
 	};
+
+	animatedValue = new Animated.Value(0);
+	value = 0;
+
+	frontInterpolate = this.animatedValue.interpolate({
+		inputRange: [0, 180],
+		outputRange: ["0deg", "180deg"]
+	});
+	backInterpolate = this.animatedValue.interpolate({
+		inputRange: [0, 180],
+		outputRange: ["180deg", "360deg"]
+	});
 
 	componentDidMount() {
 		const { questions } = this.props;
 		const QA = generator(questions);
 		const { question, answer } = QA.next().value;
+
+		this.animatedValue.addListener(({ value }) => {
+			this.value = value;
+		});
 
 		this.setState({ question, answer, QA });
 	}
@@ -77,64 +59,63 @@ class QuizView extends Component {
 		}
 	};
 
-	render() {
-		const { question, title, number } = this.state;
-		const { questions, correct, incorrect } = this.props;
-		const { nextQA } = this;
+	flipCard = () => {
+		if (this.value >= 90) {
+			Animated.timing(this.animatedValue, {
+				tovalue: 0,
+				friction: 8,
+				tension: 10
+			}).start();
+		} else {
+			Animated.timing(this.animatedValue, {
+				tovalue: 180,
+				friction: 8,
+				tension: 10
+			}).start();
+		}
+	};
 
-		console.log(correct);
-		console.log(incorrect);
+	render() {
+		const { question, answer, number } = this.state;
+		const { questions } = this.props;
+		const { nextQA, flipCard } = this;
+
+		const frontAnimatedStyle = {
+			transform: [{ rotateX: this.frontInterpolate }]
+		};
+
+		const backAnimatedStyle = {
+			transform: [{ rotateX: this.backInterpolate }]
+		};
+
 		return (
-			<Screen>
-				{question ? (
-					<P
-						style={css`
-							font-size: 20px;
-							position: absolute;
-							top: 8px;
-							left: 8px;
-							font-weight: bold;
-						`}
-					>
-						{number}/{questions.length}
-					</P>
-				) : null}
-				<Container>
-					{question ? (
-						<Fragment>
-							<Div>
-								<P
-									style={css`
-										margin-bottom: 10px;
-										font-size: ${$title};
-									`}
-								>
-									{question}
-								</P>
-								<Button
-									color={$danger}
-									title={title}
-									onPress={() => {
-										console.log("answer");
-									}}
-								/>
-							</Div>
-							<Div>
-								<Btn
-									backgroundColor={$primary}
-									text="Correct"
-									onClick={() => nextQA("correct")}
-								/>
-								<Btn
-									backgroundColor={$danger}
-									text="Incorrect"
-									onClick={() => nextQA("incorrect")}
-								/>
-							</Div>
-						</Fragment>
-					) : null}
-				</Container>
-			</Screen>
+			<View
+				style={css`
+					flex: 1;
+					position: relative;
+				`}
+			>
+				<QuizPage
+					question={question}
+					title={question}
+					number={number}
+					questions={questions}
+					subtitle="Answer"
+					nextQA={nextQA}
+					cssStyle={frontAnimatedStyle}
+					flip={flipCard}
+				/>
+				<QuizPage
+					question={question}
+					title={answer}
+					number={number}
+					questions={questions}
+					subtitle="Question"
+					nextQA={nextQA}
+					cssStyle={backAnimatedStyle}
+					flip={flipCard}
+				/>
+			</View>
 		);
 	}
 }

@@ -5,6 +5,7 @@ export const $shadow = "#000";
 export const $white = "#FCEFF6";
 export const $danger = "#DC143C";
 export const $transparent = "rgba(0,0,0,0)";
+export const $green = "#7FFF00";
 
 // font
 export const $title = "40px";
