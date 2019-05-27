@@ -29,7 +29,7 @@ class AnimatedView extends Component {
 			Animated.spring(bounceValue, { toValue: 1, friction: 4 })
 		]).start();
 
-		setTimeout(() => navigation.navigate("DeckPage", { entryId: id }), 800);
+		setTimeout(() => navigation.navigate("DeckPage", { entryId: id }), 600);
 	};
 
 	render() {

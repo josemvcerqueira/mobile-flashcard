@@ -39,3 +39,9 @@ export function fromEntries(arr) {
 
 	return obj;
 }
+
+export function* generator(questions) {
+	for (let question of questions) {
+		yield question;
+	}
+}

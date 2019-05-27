@@ -18,7 +18,8 @@ import {
 	AddDeck,
 	DeckPage,
 	FlashCardStatusBar,
-	Home
+	Home,
+	Quiz
 } from "./components";
 
 const RouteConfiguration = {
@@ -86,6 +87,15 @@ const MainNavigatior = createAppContainer(
 		},
 		AddCard: {
 			screen: AddCard,
+			navigationOptions: {
+				headerTintColor: $white,
+				headerStyle: {
+					backgroundColor: $secondary
+				}
+			}
+		},
+		Quiz: {
+			screen: Quiz,
 			navigationOptions: {
 				headerTintColor: $white,
 				headerStyle: {

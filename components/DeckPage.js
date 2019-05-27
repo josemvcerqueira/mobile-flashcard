@@ -78,7 +78,13 @@ class DeckPage extends Component {
 							navigation.navigate("AddCard", { entryId: id })
 						}
 					/>
-					<Btn backgroundColor={$secondary} text="Start Quiz" />
+					<Btn
+						backgroundColor={$secondary}
+						text="Start Quiz"
+						onClick={() =>
+							navigation.navigate("Quiz", { entryId: id })
+						}
+					/>
 					<Button
 						color={$danger}
 						title="Delete Deck"
