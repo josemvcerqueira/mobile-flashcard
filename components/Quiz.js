@@ -1,34 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import styled from "@emotion/native";
 
 import QuizView from "./QuizView";
-import { $marginLarge, $paddingSmall } from "../utils/theme";
 
-const Container = styled.View`
-	flex: 1;
-	justify-content: space-between;
-	align-items: center;
-	margin: ${$marginLarge};
-	padding: ${$paddingSmall};
-`;
+const Quiz = ({ navigation, decksArray }) => {
+	const { entryId } = navigation.state.params;
 
-class Quiz extends Component {
-	render() {
-		const { decksArray, navigation } = this.props;
+	const deck = decksArray.filter(arr => entryId === arr[0])[0][1];
+	const { questions } = deck;
 
-		const { entryId } = navigation.state.params;
-
-		const deck = decksArray.filter(arr => entryId === arr[0])[0][1];
-		const { questions } = deck;
-
-		return (
-			<Container>
-				<QuizView questions={questions} />
-			</Container>
-		);
-	}
-}
+	return <QuizView questions={questions} />;
+};
 
 function mapStateToProps({ decks }) {
 	const decksArray = Object.entries(decks);

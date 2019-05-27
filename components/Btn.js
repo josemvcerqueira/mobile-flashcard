@@ -25,6 +25,7 @@ const Btn = ({
 			<Container
 				style={css`
 					background-color: ${backgroundColor};
+					z-index: -100;
 				`}
 			>
 				<Button
