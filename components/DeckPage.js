@@ -37,7 +37,7 @@ class DeckPage extends Component {
 		const { navigation, removeDeck } = this.props;
 
 		removeDeck(id);
-		return navigation.push("Home");
+		return navigation.navigate("Home");
 	};
 
 	render() {
@@ -78,7 +78,9 @@ class DeckPage extends Component {
 						backgroundColor={$secondary}
 						text="Add Card"
 						onClick={() =>
-							navigation.navigate("AddCard", { entryId: id })
+							navigation.navigate("AddCard", {
+								entryId: id
+							})
 						}
 					/>
 					<Btn
@@ -86,7 +88,9 @@ class DeckPage extends Component {
 						text="Start Quiz"
 						onClick={() => {
 							if (!deck.questions.length) return;
-							return navigation.push("Quiz", { entryId: id });
+							return navigation.navigate("Quiz", {
+								entryId: id
+							});
 						}}
 					/>
 					<Button
