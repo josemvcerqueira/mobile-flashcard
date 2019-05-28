@@ -17,13 +17,9 @@ class QuizView extends Component {
 		flip: true
 	};
 
-	static navigationOptions = {
-		headerLeft: null,
-		title: "Quiz"
-	};
-
 	componentDidMount() {
 		const { questions } = this.props;
+		console.log(this.state.QA);
 		const QA = generator(questions);
 		const { question, answer } = QA.next().value;
 
@@ -46,7 +42,7 @@ class QuizView extends Component {
 				number: prevState.number + 1
 			}));
 		} else {
-			navigation.navigate("FinalScore", {
+			navigation.push("FinalScore", {
 				entryId: id,
 				questions: questions
 			});

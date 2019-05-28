@@ -55,10 +55,6 @@ class FinalScore extends Component {
 		this.setState({ score });
 	}
 
-	componentWillUnmount() {
-		this.props.reset();
-	}
-
 	render() {
 		const { score } = this.state;
 
@@ -90,13 +86,15 @@ class FinalScore extends Component {
 						backgroundColor={$green}
 						text="Restart Quiz"
 						onClick={() =>
-							navigation.navigate("Quiz", { entryId: entryId })
+							this.props.reset() &&
+							navigation.push("Quiz", { entryId: entryId })
 						}
 					/>
 					<Btn
 						backgroundColor={$danger}
 						text="Back to Deck"
 						onClick={() =>
+							this.props.reset() &&
 							navigation.navigate("DeckPage", {
 								entryId: entryId
 							})

@@ -59,6 +59,8 @@ class Home extends Component {
 
 		const { isLoading, error, decks } = state;
 
+		console.log(state);
+
 		if (isLoading) {
 			return (
 				<Container>

@@ -26,6 +26,7 @@
     "redux-saga": "^1.0.2"
   },
   "devDependencies": {
+    "@babel/polyfill": "^7.4.4",
     "babel-preset-expo": "^5.0.0"
   },
   "private": true

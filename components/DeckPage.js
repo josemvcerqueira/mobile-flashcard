@@ -33,13 +33,8 @@ class DeckPage extends Component {
 		};
 	};
 
-	shouldComponentUpdate(nextProps) {
-		if (this.props.state !== nextProps.state) return true;
-		return false;
-	}
-
 	render() {
-		const { navigation, stateArray, removeDeck } = this.props;
+		const { navigation, stateArray, deleteDeck } = this.props;
 		const { entryId } = navigation.state.params;
 
 		const data = stateArray.filter(arr => entryId === arr[0])[0];
@@ -81,15 +76,16 @@ class DeckPage extends Component {
 					<Btn
 						backgroundColor={$secondary}
 						text="Start Quiz"
-						onClick={() =>
-							navigation.navigate("Quiz", { entryId: id })
-						}
+						onClick={() => {
+							if (!deck.questions.length) return;
+							navigation.push("Quiz", { entryId: id });
+						}}
 					/>
 					<Button
 						color={$danger}
 						title="Delete Deck"
 						onPress={() => {
-							removeDeck(id);
+							deleteDeck(id);
 							navigation.navigate("Home");
 						}}
 					/>
@@ -108,7 +104,7 @@ function mapStateToProps({ decks }) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		removeDeck: id => dispatch(removeDeck(id))
+		deleteDeck: id => dispatch(removeDeck(id))
 	};
 }
 
