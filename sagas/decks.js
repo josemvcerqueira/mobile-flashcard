@@ -31,8 +31,12 @@ function* watchRemoveDeckRequest() {
 }
 
 function* removeDeck(action) {
-	yield call(api.removeDeck, action.payload.id);
-	yield call(handleDecksLoad);
+	try {
+		yield call(api.removeDeck, action.payload.id);
+		yield call(handleDecksLoad);
+	} catch (error) {
+		console.log("error trying to remove");
+	}
 }
 
 const decksSagas = [

@@ -22,6 +22,7 @@ function decks(state = {}, action) {
 			const { id } = action.payload;
 			let stateArr = Object.entries(state).filter(deck => deck[0] !== id);
 			let stateObj = fromEntries(stateArr);
+
 			return { ...stateObj };
 		}
 		case CARDS.ADD: {

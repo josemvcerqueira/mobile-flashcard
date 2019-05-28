@@ -33,8 +33,16 @@ class DeckPage extends Component {
 		};
 	};
 
+	handleDelete = id => {
+		const { navigation, removeDeck } = this.props;
+
+		removeDeck(id);
+		return navigation.push("Home");
+	};
+
 	render() {
-		const { navigation, stateArray, deleteDeck } = this.props;
+		const { navigation, stateArray } = this.props;
+		const { handleDelete } = this;
 		const { entryId } = navigation.state.params;
 
 		const data = stateArray.filter(arr => entryId === arr[0])[0];
@@ -78,16 +86,13 @@ class DeckPage extends Component {
 						text="Start Quiz"
 						onClick={() => {
 							if (!deck.questions.length) return;
-							navigation.push("Quiz", { entryId: id });
+							return navigation.push("Quiz", { entryId: id });
 						}}
 					/>
 					<Button
 						color={$danger}
 						title="Delete Deck"
-						onPress={() => {
-							deleteDeck(id);
-							navigation.navigate("Home");
-						}}
+						onPress={() => handleDelete(id)}
 					/>
 				</View>
 			</Container>
@@ -104,7 +109,7 @@ function mapStateToProps({ decks }) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		deleteDeck: id => dispatch(removeDeck(id))
+		removeDeck: id => dispatch(removeDeck(id))
 	};
 }
 
