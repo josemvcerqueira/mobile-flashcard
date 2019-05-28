@@ -31,60 +31,48 @@ const Div = styled.View`
 	justify-content: center;
 `;
 
-const QuizPage = ({
-	title,
-	number,
-	question,
-	questions,
-	subtitle,
-	nextQA,
-	flip
-}) => (
+const QuizPage = ({ title, number, questions, subtitle, nextQA, flip }) => (
 	<Fragment>
-		{question ? (
-			<P
-				style={css`
-					font-size: 20px;
-					position: absolute;
-					top: 8px;
-					left: 8px;
-					font-weight: bold;
-				`}
-			>
-				{number}/{questions.length}
-			</P>
-		) : null}
-		{question ? (
-			<Container>
-				<Div>
-					<P
-						style={css`
-							margin-bottom: 15px;
-							font-size: ${$title};
-						`}
-					>
-						{title}
-					</P>
-					<Button
-						color={$danger}
-						title={subtitle}
-						onPress={() => flip()}
-					/>
-				</Div>
-				<Div>
-					<Btn
-						backgroundColor={$green}
-						text="Correct"
-						onClick={() => nextQA("correct")}
-					/>
-					<Btn
-						backgroundColor={$danger}
-						text="Incorrect"
-						onClick={() => nextQA("incorrect")}
-					/>
-				</Div>
-			</Container>
-		) : null}
+		<P
+			style={css`
+				font-size: 20px;
+				position: absolute;
+				top: 8px;
+				left: 8px;
+				font-weight: bold;
+			`}
+		>
+			{number}/{questions.length}
+		</P>
+		<Container>
+			<Div>
+				<P
+					style={css`
+						margin-bottom: 15px;
+						font-size: ${$title};
+					`}
+				>
+					{title}
+				</P>
+				<Button
+					color={$danger}
+					title={subtitle}
+					onPress={() => flip()}
+				/>
+			</Div>
+			<Div>
+				<Btn
+					backgroundColor={$green}
+					text="Correct"
+					onClick={() => nextQA("correct")}
+				/>
+				<Btn
+					backgroundColor={$danger}
+					text="Incorrect"
+					onClick={() => nextQA("incorrect")}
+				/>
+			</Div>
+		</Container>
 	</Fragment>
 );
 

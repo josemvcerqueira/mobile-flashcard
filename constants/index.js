@@ -16,6 +16,5 @@ export const CARDS = {
 
 export const QUIZ = {
 	CORRECT: "QUIZ_CORRECT",
-	INCORRECT: "QUIZ_INCORRECT",
 	RESET: "QUIZ_RESET"
 };

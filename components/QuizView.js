@@ -6,7 +6,7 @@ import FlipCard from "react-native-flip-card";
 
 import QuizPage from "./QuizPage";
 import { generator } from "../utils/helpers";
-import { addCorrectAnswer, addIncorrectAnswer, resetQuiz } from "../actions";
+import { addCorrectAnswer } from "../actions";
 
 class QuizView extends Component {
 	state = {
@@ -15,6 +15,11 @@ class QuizView extends Component {
 		number: 1,
 		QA: null,
 		flip: true
+	};
+
+	static navigationOptions = {
+		headerLeft: null,
+		title: "Quiz"
 	};
 
 	componentDidMount() {
@@ -27,9 +32,9 @@ class QuizView extends Component {
 
 	nextQA = action => {
 		const { QA } = this.state;
-		const { addCorrectAnswer, addIncorrectAnswer } = this.props;
+		const { addCorrectAnswer, navigation, id, questions } = this.props;
 
-		action === "correct" ? addCorrectAnswer() : addIncorrectAnswer();
+		action === "correct" ? addCorrectAnswer() : null;
 
 		const result = QA.next().value;
 
@@ -41,7 +46,10 @@ class QuizView extends Component {
 				number: prevState.number + 1
 			}));
 		} else {
-			this.setState({ question: "", answer: "" });
+			navigation.navigate("FinalScore", {
+				entryId: id,
+				questions: questions
+			});
 		}
 	};
 
@@ -92,19 +100,16 @@ class QuizView extends Component {
 }
 
 function mapStateToProps({ quiz }) {
-	const { correct, incorrect } = quiz;
+	const { correct } = quiz;
 
 	return {
-		correct,
-		incorrect
+		correct
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		resetQuiz: () => dispatch(resetQuiz()),
-		addCorrectAnswer: () => dispatch(addCorrectAnswer()),
-		addIncorrectAnswer: () => dispatch(addIncorrectAnswer())
+		addCorrectAnswer: () => dispatch(addCorrectAnswer())
 	};
 }
 

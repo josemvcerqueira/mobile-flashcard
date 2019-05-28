@@ -19,7 +19,8 @@ import {
 	DeckPage,
 	FlashCardStatusBar,
 	Home,
-	Quiz
+	Quiz,
+	FinalScore
 } from "./components";
 
 const RouteConfiguration = {
@@ -96,6 +97,17 @@ const MainNavigatior = createAppContainer(
 		},
 		Quiz: {
 			screen: Quiz,
+			navigationOptions: {
+				headerTintColor: $white,
+				headerStyle: {
+					backgroundColor: $secondary
+				},
+				headerLeft: null,
+				title: "Quiz"
+			}
+		},
+		FinalScore: {
+			screen: FinalScore,
 			navigationOptions: {
 				headerTintColor: $white,
 				headerStyle: {

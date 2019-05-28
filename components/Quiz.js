@@ -9,7 +9,9 @@ const Quiz = ({ navigation, decksArray }) => {
 	const deck = decksArray.filter(arr => entryId === arr[0])[0][1];
 	const { questions } = deck;
 
-	return <QuizView questions={questions} />;
+	return (
+		<QuizView navigation={navigation} id={entryId} questions={questions} />
+	);
 };
 
 function mapStateToProps({ decks }) {

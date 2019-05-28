@@ -45,3 +45,8 @@ export function* generator(questions) {
 		yield question;
 	}
 }
+
+export function calcScore(questions, correct) {
+	const total = questions.length;
+	return (correct / total) * 100;
+}

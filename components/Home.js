@@ -77,8 +77,6 @@ class Home extends Component {
 			);
 		}
 
-		console.log(decks);
-
 		return (
 			<Container>
 				{Object.entries(decks).map(([id, deck]) => (
