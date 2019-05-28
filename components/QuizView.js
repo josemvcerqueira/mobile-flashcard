@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Animated, View } from "react-native";
+import { View } from "react-native";
 import { css } from "@emotion/native";
+import FlipCard from "react-native-flip-card";
 
 import QuizPage from "./QuizPage";
 import { generator } from "../utils/helpers";
@@ -12,29 +13,14 @@ class QuizView extends Component {
 		question: "",
 		answer: "",
 		number: 1,
-		QA: null
+		QA: null,
+		flip: true
 	};
-
-	animatedValue = new Animated.Value(0);
-	value = 0;
-
-	frontInterpolate = this.animatedValue.interpolate({
-		inputRange: [0, 180],
-		outputRange: ["0deg", "180deg"]
-	});
-	backInterpolate = this.animatedValue.interpolate({
-		inputRange: [0, 180],
-		outputRange: ["180deg", "360deg"]
-	});
 
 	componentDidMount() {
 		const { questions } = this.props;
 		const QA = generator(questions);
 		const { question, answer } = QA.next().value;
-
-		this.animatedValue.addListener(({ value }) => {
-			this.value = value;
-		});
 
 		this.setState({ question, answer, QA });
 	}
@@ -60,61 +46,46 @@ class QuizView extends Component {
 	};
 
 	flipCard = () => {
-		if (this.value >= 90) {
-			Animated.timing(this.animatedValue, {
-				tovalue: 0,
-				friction: 8,
-				tension: 10
-			}).start();
-		} else {
-			Animated.timing(this.animatedValue, {
-				tovalue: 180,
-				friction: 8,
-				tension: 10
-			}).start();
-		}
+		this.setState(prevState => ({ flip: !prevState.flip }));
 	};
 
 	render() {
-		const { question, answer, number } = this.state;
+		const { question, answer, number, flip } = this.state;
 		const { questions } = this.props;
 		const { nextQA, flipCard } = this;
-
-		const frontAnimatedStyle = {
-			transform: [{ rotateX: this.frontInterpolate }]
-		};
-
-		const backAnimatedStyle = {
-			transform: [{ rotateX: this.backInterpolate }]
-		};
 
 		return (
 			<View
 				style={css`
 					flex: 1;
-					position: relative;
 				`}
 			>
-				<QuizPage
-					question={question}
-					title={question}
-					number={number}
-					questions={questions}
-					subtitle="Answer"
-					nextQA={nextQA}
-					cssStyle={frontAnimatedStyle}
-					flip={flipCard}
-				/>
-				<QuizPage
-					question={question}
-					title={answer}
-					number={number}
-					questions={questions}
-					subtitle="Question"
-					nextQA={nextQA}
-					cssStyle={backAnimatedStyle}
-					flip={flipCard}
-				/>
+				<FlipCard
+					flip={flip}
+					friction={6}
+					flipHorizontal={true}
+					flipVertical={false}
+					perspective={1000}
+				>
+					<QuizPage
+						question={question}
+						title={question}
+						number={number}
+						questions={questions}
+						subtitle="Answer"
+						nextQA={nextQA}
+						flip={flipCard}
+					/>
+					<QuizPage
+						question={question}
+						title={answer}
+						number={number}
+						questions={questions}
+						subtitle="Question"
+						nextQA={nextQA}
+						flip={flipCard}
+					/>
+				</FlipCard>
 			</View>
 		);
 	}
