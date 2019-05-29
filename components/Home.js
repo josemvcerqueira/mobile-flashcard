@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import styled from "@emotion/native";
-import { Animated } from "react-native";
+import styled, { css } from "@emotion/native";
+import { Animated, FlatList, View } from "react-native";
 
 import {
 	$marginLarge,
@@ -54,10 +54,26 @@ class Home extends Component {
 		this.props.loadDecks();
 	}
 
-	render() {
-		const { state, navigation } = this.props;
+	renderDeck = ({ item }) => {
+		const { navigation } = this.props;
+		const [id, deck] = item;
 
+		return (
+			<AnimatedView
+				key={id}
+				deck={deck}
+				id={id}
+				navigation={navigation}
+			/>
+		);
+	};
+
+	render() {
+		const { state } = this.props;
+		const { renderDeck } = this;
 		const { isLoading, error, decks } = state;
+
+		const decksArr = Object.entries(decks);
 
 		if (isLoading) {
 			return (
@@ -81,17 +97,25 @@ class Home extends Component {
 		}
 
 		return (
-			<Container>
-				{Object.entries(decks).map(([id, deck]) => (
-					<AnimatedView
-						key={id}
-						deck={deck}
-						id={id}
-						navigation={navigation}
-					/>
-				))}
+			<View
+				style={css`
+					flex: 1;
+				`}
+			>
+				<FlatList
+					contentContainerStyle={css`
+						justify-content: center;
+						align-items: center;
+					`}
+					keyExtractor={item => {
+						const [id] = item;
+						return id;
+					}}
+					data={decksArr}
+					renderItem={renderDeck}
+				/>
 				{error && <Error>{JSON.stringify(error)}</Error>}
-			</Container>
+			</View>
 		);
 	}
 }
