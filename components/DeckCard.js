@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "@emotion/native";
 
 import { $primary, $secondary, $title, $text } from "../utils/theme";
+import DeckViewDetails from "./DeckViewDetails";
 
 const Card = styled.View`
 	width: 300px;
@@ -13,37 +14,23 @@ const Card = styled.View`
 	border-radius: 15px;
 `;
 
-const P = styled.Text`
-	color: ${$primary};
-`;
-
 const DeckCard = ({ deck }) => (
 	<Card>
-		<P
-			style={css`
+		<DeckViewDetails
+			title={deck.title}
+			css={css`
 				margin-bottom: 5px;
 				font-size: ${$title};
+				color: ${$primary};
 			`}
-		>
-			{deck.title}
-		</P>
-		{deck.questions.length === 1 ? (
-			<P
-				style={css`
-					font-size: ${$text};
-				`}
-			>
-				{deck.questions.length} Card
-			</P>
-		) : (
-			<P
-				style={css`
-					font-size: ${$text};
-				`}
-			>
-				{deck.questions.length} Cards
-			</P>
-		)}
+		/>
+		<DeckViewDetails
+			length={deck.questions.length}
+			css={css`
+				font-size: ${$text};
+				color: ${$primary};
+			`}
+		/>
 	</Card>
 );
 

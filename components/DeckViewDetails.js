@@ -1,21 +1,15 @@
 import React from "react";
-import styled from "@emotion/native";
-
-import { $secondary } from "../utils/theme";
-
-const P = styled.Text`
-	color: ${$secondary};
-`;
+import { Text } from "react-native";
 
 const DeckViewDetails = ({ css, title = null, length = null }) => (
-	<P style={css}>
+	<Text style={css}>
 		{title}
 		{length === null
 			? null
 			: length === 1
 			? `${length} Card`
 			: `${length} Cards`}
-	</P>
+	</Text>
 );
 
 export default DeckViewDetails;

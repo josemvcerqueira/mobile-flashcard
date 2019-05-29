@@ -63,12 +63,14 @@ class DeckPage extends Component {
 							css={css`
 								margin-bottom: 5px;
 								font-size: ${$title};
+								color: ${$secondary};
 							`}
 						/>
 						<DeckViewDetails
 							length={deck.questions.length}
 							css={css`
 								font-size: ${$text};
+								color: ${$secondary};
 							`}
 						/>
 					</View>
