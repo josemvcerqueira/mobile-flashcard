@@ -14,6 +14,7 @@ import {
 import Btn from "./Btn";
 import { removeDeck } from "../actions";
 import { clearLocalNotification } from "../utils/helpers";
+import DeckViewDetails from "./DeckViewDetails";
 
 const Container = styled.View`
 	flex: 1;
@@ -57,31 +58,19 @@ class DeckPage extends Component {
 							align-items: center;
 						`}
 					>
-						<P
-							style={css`
-								margin-bottom: 10px;
+						<DeckViewDetails
+							title={deck.title}
+							css={css`
+								margin-bottom: 5px;
 								font-size: ${$title};
 							`}
-						>
-							{deck.title}
-						</P>
-						{deck.questions.length === 1 ? (
-							<P
-								style={css`
-									font-size: ${$text};
-								`}
-							>
-								{deck.questions.length} Card
-							</P>
-						) : (
-							<P
-								style={css`
-									font-size: ${$text};
-								`}
-							>
-								{deck.questions.length} Cards
-							</P>
-						)}
+						/>
+						<DeckViewDetails
+							length={deck.questions.length}
+							css={css`
+								font-size: ${$text};
+							`}
+						/>
 					</View>
 					<View>
 						<Btn
