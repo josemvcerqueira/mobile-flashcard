@@ -54,11 +54,13 @@ const QuizPage = ({ title, number, questions, subtitle, nextQA, flip }) => (
 				>
 					{title}
 				</P>
-				<Button
-					color={$danger}
-					title={subtitle}
-					onPress={() => flip()}
-				/>
+				<Div>
+					<Button
+						color={$danger}
+						title={subtitle}
+						onPress={() => flip()}
+					/>
+				</Div>
 			</Div>
 			<Div>
 				<Btn

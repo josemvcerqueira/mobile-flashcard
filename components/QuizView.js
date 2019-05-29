@@ -38,7 +38,8 @@ class QuizView extends Component {
 			this.setState(prevState => ({
 				question,
 				answer,
-				number: prevState.number + 1
+				number: prevState.number + 1,
+				flip: false
 			}));
 		} else {
 			navigation.push("FinalScore", {
