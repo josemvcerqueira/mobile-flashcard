@@ -71,7 +71,10 @@ class Home extends Component {
 			return (
 				<Container>
 					<Title size="large" color={$primary}>
-						Welcome! Start by adding a deck! 😊
+						Welcome!
+					</Title>
+					<Title size="large" color={$primary}>
+						Start by adding a deck! 😊
 					</Title>
 				</Container>
 			);

@@ -27,13 +27,23 @@ const DeckCard = ({ deck }) => (
 		>
 			{deck.title}
 		</P>
-		<P
-			style={css`
-				font-size: ${$text};
-			`}
-		>
-			{deck.questions.length} Cards
-		</P>
+		{deck.questions.length === 1 ? (
+			<P
+				style={css`
+					font-size: ${$text};
+				`}
+			>
+				{deck.questions.length} Card
+			</P>
+		) : (
+			<P
+				style={css`
+					font-size: ${$text};
+				`}
+			>
+				{deck.questions.length} Cards
+			</P>
+		)}
 	</Card>
 );
 
