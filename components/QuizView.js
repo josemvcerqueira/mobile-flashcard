@@ -75,7 +75,7 @@ class QuizView extends Component {
 						title={question}
 						number={number}
 						questions={questions}
-						subtitle="Answer"
+						subtitle="Show Answer"
 						nextQA={nextQA}
 						flip={flipCard}
 					/>
@@ -84,7 +84,7 @@ class QuizView extends Component {
 						title={answer}
 						number={number}
 						questions={questions}
-						subtitle="Question"
+						subtitle="Show Question"
 						nextQA={nextQA}
 						flip={flipCard}
 					/>
