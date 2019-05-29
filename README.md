@@ -12,7 +12,7 @@ This web application allows the user to:
 ## Technology Stack
 
 -   React for the view library
--   React Native for naitve features
+-   React Native for the native features
 -   Redux for state management
 -   Emotion for styling
 -   Redux Saga for async calls
@@ -36,12 +36,12 @@ The app is organized using the "Rails Style"
 ├── assets
 ├── components # All React components
 ├── constants # All constants for the redux store actions
-├── reducers # All state management to the redux store
-├── sagas # Redux saga middleware sagas
+├── reducers # All state management logic for the redux store
+├── sagas # Redux saga middleware
 ├── utils
 │   ├── api.js # AsyncStorage logic
 │   ├── helpers.js # Helper functions
-│   └── theme.js # All the style used in the app
+│   └── theme.js # All the styles used in the app
 ├── .eslintrc
 ├── .gitignore
 ├── .watchmanconfig
