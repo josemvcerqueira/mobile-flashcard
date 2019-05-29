@@ -13,6 +13,7 @@ import {
 } from "../utils/theme";
 import Btn from "./Btn";
 import { removeDeck } from "../actions";
+import { clearLocalNotification } from "../utils/helpers";
 
 const Container = styled.View`
 	flex: 1;
@@ -97,6 +98,7 @@ class DeckPage extends Component {
 							text="Start Quiz"
 							onClick={() => {
 								if (!deck.questions.length) return;
+								clearLocalNotification();
 								return navigation.navigate("Quiz", {
 									entryId: id
 								});

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled, { css } from "@emotion/native";
 import { connect } from "react-redux";
 
-import { calcScore } from "../utils/helpers";
+import { calcScore, setLocalNotification } from "../utils/helpers";
 
 import {
 	$danger,
@@ -87,6 +87,7 @@ class FinalScore extends Component {
 						text="Restart Quiz"
 						onClick={() =>
 							this.props.reset() &&
+							setLocalNotification() &&
 							navigation.push("Quiz", { entryId: entryId })
 						}
 					/>
@@ -95,6 +96,7 @@ class FinalScore extends Component {
 						text="Back to Deck"
 						onClick={() =>
 							this.props.reset() &&
+							setLocalNotification() &&
 							navigation.navigate("DeckPage", {
 								entryId: entryId
 							})

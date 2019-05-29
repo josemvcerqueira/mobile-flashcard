@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { View } from "react-native";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -22,6 +22,7 @@ import {
 	Quiz,
 	FinalScore
 } from "./components";
+import { setLocalNotification } from "./utils/helpers";
 
 const RouteConfiguration = {
 	Home: {
@@ -124,16 +125,24 @@ const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 
-const App = () => (
-	<Provider store={store}>
-		<View style={{ flex: 1 }}>
-			<FlashCardStatusBar
-				backgroundColor={$secondary}
-				barStyle="light-content"
-			/>
-			<MainNavigatior />
-		</View>
-	</Provider>
-);
+class App extends Component {
+	componentDidMount() {
+		setLocalNotification();
+	}
+
+	render() {
+		return (
+			<Provider store={store}>
+				<View style={{ flex: 1 }}>
+					<FlashCardStatusBar
+						backgroundColor={$secondary}
+						barStyle="light-content"
+					/>
+					<MainNavigatior />
+				</View>
+			</Provider>
+		);
+	}
+}
 
 export default App;
