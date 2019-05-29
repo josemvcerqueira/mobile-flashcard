@@ -1,6 +1,10 @@
 # Mobile Flashcards
 
-This project was bootstrapped with [Create React App](https://github.com/react-community/create-react-native-app) and was built to be tested on IOS.
+This project was bootstrapped with [Create React App](https://github.com/react-community/create-react-native-app) and [Expo](https://docs.expo.io/versions/latest/)
+
+# Important
+
+This project has been designed and tested for iOS. The development was tested via the Expo application avaliable for the iPhone not the emulator.
 
 This web application allows the user to:
 
