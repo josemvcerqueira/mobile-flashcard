@@ -35,7 +35,6 @@ class DeckPage extends Component {
 
 	handleDelete = id => {
 		const { navigation, removeDeck } = this.props;
-
 		removeDeck(id);
 		return navigation.navigate("Home");
 	};
@@ -44,63 +43,66 @@ class DeckPage extends Component {
 		const { navigation, stateArray } = this.props;
 		const { handleDelete } = this;
 		const { entryId } = navigation.state.params;
-
 		const data = stateArray.filter(arr => entryId === arr[0])[0];
 
-		const [id, deck] = data;
+		if (data) {
+			const [id, deck] = data;
 
-		return (
-			<Container>
-				<View
-					style={css`
-						display: flex;
-						align-items: center;
-					`}
-				>
-					<P
+			return (
+				<Container>
+					<View
 						style={css`
-							margin-bottom: 10px;
-							font-size: ${$title};
+							display: flex;
+							align-items: center;
 						`}
 					>
-						{deck.title}
-					</P>
-					<P
-						style={css`
-							font-size: ${$text};
-						`}
-					>
-						{deck.questions.length} Cards
-					</P>
-				</View>
-				<View>
-					<Btn
-						backgroundColor={$secondary}
-						text="Add Card"
-						onClick={() =>
-							navigation.navigate("AddCard", {
-								entryId: id
-							})
-						}
-					/>
-					<Btn
-						backgroundColor={$secondary}
-						text="Start Quiz"
-						onClick={() => {
-							if (!deck.questions.length) return;
-							return navigation.navigate("Quiz", {
-								entryId: id
-							});
-						}}
-					/>
-					<Button
-						color={$danger}
-						title="Delete Deck"
-						onPress={() => handleDelete(id)}
-					/>
-				</View>
-			</Container>
-		);
+						<P
+							style={css`
+								margin-bottom: 10px;
+								font-size: ${$title};
+							`}
+						>
+							{deck.title}
+						</P>
+						<P
+							style={css`
+								font-size: ${$text};
+							`}
+						>
+							{deck.questions.length} Cards
+						</P>
+					</View>
+					<View>
+						<Btn
+							backgroundColor={$secondary}
+							text="Add Card"
+							onClick={() =>
+								navigation.navigate("AddCard", {
+									entryId: id
+								})
+							}
+						/>
+						<Btn
+							backgroundColor={$secondary}
+							text="Start Quiz"
+							onClick={() => {
+								if (!deck.questions.length) return;
+								return navigation.navigate("Quiz", {
+									entryId: id
+								});
+							}}
+						/>
+						<Button
+							color={$danger}
+							title="Delete Deck"
+							onPress={() => handleDelete(id)}
+						/>
+					</View>
+				</Container>
+			);
+		} else {
+			return <Container>{null}</Container>;
+		}
 	}
 }
 

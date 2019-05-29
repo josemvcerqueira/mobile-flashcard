@@ -14,12 +14,11 @@ class QuizView extends Component {
 		answer: "",
 		number: 1,
 		QA: null,
-		flip: true
+		flip: false
 	};
 
 	componentDidMount() {
 		const { questions } = this.props;
-		console.log(this.state.QA);
 		const QA = generator(questions);
 		const { question, answer } = QA.next().value;
 
