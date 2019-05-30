@@ -40,30 +40,23 @@ const Div = styled.View`
 `;
 
 class FinalScore extends Component {
-	state = {
-		score: 0
-	};
-
 	static navigationOptions = {
 		headerLeft: null,
 		title: "Final Score"
 	};
 
-	componentDidMount() {
-		const { navigation } = this.props;
+	async componentDidMount() {
+		await clearLocalNotification();
+		await setLocalNotification();
+	}
+
+	render() {
+		const { navigation, reset } = this.props;
+		const { entryId } = navigation.state.params;
 		const { questions } = navigation.state.params;
 		const { correct } = this.props.quiz;
 
 		const score = calcScore(questions, correct);
-
-		this.setState({ score });
-	}
-
-	render() {
-		const { score } = this.state;
-
-		const { navigation } = this.props;
-		const { entryId } = navigation.state.params;
 
 		return (
 			<Container>
@@ -90,10 +83,7 @@ class FinalScore extends Component {
 						backgroundColor={$green}
 						text="Restart Quiz"
 						onClick={() =>
-							this.props.reset() &&
-							clearLocalNotification().then(
-								setLocalNotification()
-							) &&
+							reset() &&
 							navigation.push("Quiz", { entryId: entryId })
 						}
 					/>
@@ -101,10 +91,7 @@ class FinalScore extends Component {
 						backgroundColor={$danger}
 						text="Back to Deck"
 						onClick={() =>
-							this.props.reset() &&
-							clearLocalNotification().then(
-								setLocalNotification()
-							) &&
+							reset() &&
 							navigation.navigate("DeckPage", {
 								entryId: entryId
 							})

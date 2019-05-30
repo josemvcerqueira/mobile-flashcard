@@ -14,7 +14,8 @@ class QuizView extends Component {
 		answer: "",
 		number: 1,
 		QA: null,
-		flip: false
+		flip: false,
+		limit: 0
 	};
 
 	componentDidMount() {
@@ -26,10 +27,14 @@ class QuizView extends Component {
 	}
 
 	nextQA = action => {
-		const { QA } = this.state;
+		const { QA, limit } = this.state;
 		const { addCorrectAnswer, navigation, id, questions } = this.props;
 
-		action === "correct" ? addCorrectAnswer() : null;
+		if (limit < questions.length) {
+			action === "correct" ? addCorrectAnswer() : null;
+			console.log("called");
+			console.log(limit);
+		}
 
 		const result = QA.next().value;
 
@@ -39,9 +44,13 @@ class QuizView extends Component {
 				question,
 				answer,
 				number: prevState.number + 1,
-				flip: false
+				flip: false,
+				limit: prevState.limit + 1
 			}));
 		} else {
+			this.setState(prevState => ({
+				limit: prevState.limit + 1
+			}));
 			navigation.push("FinalScore", {
 				entryId: id,
 				questions: questions
