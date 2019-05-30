@@ -13,7 +13,6 @@ import {
 } from "../utils/theme";
 import Btn from "./Btn";
 import { removeDeck } from "../actions";
-import { clearLocalNotification } from "../utils/helpers";
 import DeckViewDetails from "./DeckViewDetails";
 
 const Container = styled.View`
@@ -22,10 +21,6 @@ const Container = styled.View`
 	align-items: center;
 	margin: ${$marginLarge};
 	padding: ${$paddingSmall};
-`;
-
-const P = styled.Text`
-	color: ${$secondary};
 `;
 
 class DeckPage extends Component {
@@ -89,7 +84,6 @@ class DeckPage extends Component {
 							text="Start Quiz"
 							onClick={() => {
 								if (!deck.questions.length) return;
-								clearLocalNotification();
 								return navigation.navigate("Quiz", {
 									entryId: id
 								});

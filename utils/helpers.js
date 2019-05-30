@@ -96,7 +96,8 @@ export async function setLocalNotification() {
 				Notifications.scheduleLocalNotificationAsync(
 					createNotification(),
 					{
-						time: tomorrow
+						time: tomorrow,
+						repeatType: "day"
 					}
 				);
 				AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
