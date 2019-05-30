@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
-import styled from "@emotion/native";
+import styled, { css } from "@emotion/native";
+import Toast from "react-native-easy-toast";
 
 import { addDeck } from "../actions";
-import { $primary, $marginLarge, $secondary, $title } from "../utils/theme";
+import {
+	$primary,
+	$marginLarge,
+	$secondary,
+	$title,
+	$danger
+} from "../utils/theme";
 import { createDeck } from "../utils/helpers";
 import Input from "./Input";
 import Btn from "./Btn";
@@ -31,6 +38,11 @@ class AddDeck extends Component {
 	handleNewDeck = () => {
 		const { title } = this.state;
 		const { addDeck, navigation } = this.props;
+
+		if (!title) {
+			this.refs.toast.show("Please provide a title! 👩‍🎤");
+			return;
+		}
 
 		const newDeck = createDeck(title);
 		addDeck(newDeck);
@@ -63,13 +75,19 @@ class AddDeck extends Component {
 							placeholder="Title"
 						/>
 						<Btn
-							value={title}
 							backgroundColor={$secondary}
 							text="Create Deck"
 							onClick={handleNewDeck}
 						/>
 					</View>
 				</TouchableWithoutFeedback>
+				<Toast
+					position={"center"}
+					ref="toast"
+					style={css`
+						background-color: ${$danger};
+					`}
+				/>
 			</Container>
 		);
 	}

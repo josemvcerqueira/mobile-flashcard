@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { View, TouchableWithoutFeedback, Keyboard } from "react-native";
-import styled from "@emotion/native";
+import styled, { css } from "@emotion/native";
 import { Header } from "react-navigation";
 import { connect } from "react-redux";
+import Toast from "react-native-easy-toast";
 
 import { addCard } from "../actions";
-import { $primary, $marginLarge, $secondary } from "../utils/theme";
+import { $primary, $marginLarge, $secondary, $danger } from "../utils/theme";
 import Input from "./Input";
 import Btn from "./Btn";
 
@@ -36,8 +37,12 @@ class AddCard extends Component {
 
 	handleAddCard = () => {
 		const { entryId } = this.props.navigation.state.params;
-		const question = this.state.question;
-		const answer = this.state.answer;
+		const { question, answer } = this.state;
+
+		if (!question || !answer) {
+			this.refs.toast.show("Please fill both fields! 👩‍🎤");
+			return;
+		}
 
 		const card = { question, answer, id: entryId };
 		this.props.addCard(card);
@@ -84,12 +89,18 @@ class AddCard extends Component {
 						</View>
 						<Btn
 							onClick={handleAddCard}
-							value={value}
 							backgroundColor={$secondary}
 							text="Submit"
 						/>
 					</View>
 				</TouchableWithoutFeedback>
+				<Toast
+					position={"center"}
+					ref="toast"
+					style={css`
+						background-color: ${$danger};
+					`}
+				/>
 			</Container>
 		);
 	}

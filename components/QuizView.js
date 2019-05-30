@@ -32,8 +32,6 @@ class QuizView extends Component {
 
 		if (limit < questions.length) {
 			action === "correct" ? addCorrectAnswer() : null;
-			console.log("called");
-			console.log(limit);
 		}
 
 		const result = QA.next().value;
