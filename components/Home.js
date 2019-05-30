@@ -9,7 +9,8 @@ import {
 	$primary,
 	$secondary,
 	$title,
-	$danger
+	$danger,
+	$marginSmall
 } from "../utils/theme";
 import AnimatedView from "./AnimatedView";
 import { isEmpty } from "../utils/helpers";
@@ -36,6 +37,7 @@ const Error = styled.View`
 const Title = styled.Text`
 	color: ${$secondary};
 	font-size: ${$title};
+	text-align: center;
 `;
 
 const Loading = styled.ActivityIndicator`
@@ -86,7 +88,13 @@ class Home extends Component {
 		if (!isEmpty(decks) && !isLoading) {
 			return (
 				<Container>
-					<Title size="large" color={$primary}>
+					<Title
+						style={css`
+							margin-bottom: ${$marginSmall};
+						`}
+						size="large"
+						color={$primary}
+					>
 						Welcome!
 					</Title>
 					<Title size="large" color={$primary}>

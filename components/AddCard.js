@@ -95,7 +95,7 @@ class AddCard extends Component {
 					</View>
 				</TouchableWithoutFeedback>
 				<Toast
-					position={"center"}
+					position={"top"}
 					ref="toast"
 					style={css`
 						background-color: ${$danger};

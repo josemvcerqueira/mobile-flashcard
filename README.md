@@ -52,6 +52,7 @@ The app is organized using the "Rails Style"
 ├── App.js # React Navigation, Redux Store and entry point of the app
 ├── App.json
 ├── babel.config.js
+├── MainNavigation.js # All react navigation logic
 ├── package.json
 ├── README.md # this file
 └── yarn.lock
